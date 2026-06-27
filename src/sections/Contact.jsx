@@ -58,14 +58,14 @@ export default function Contact() {
 
   return (
     <section id="contact" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
-      {/* ── Background Circuit Image ── */}
+      {/* ── Background Circuit Image (Dull opacity) ── */}
       {raicBg && (
         <img
           src={raicBg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          style={{ filter: 'brightness(1.3) contrast(1.15)' }}
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-25"
+          style={{ filter: 'brightness(0.65) contrast(0.95)' }}
         />
       )}
 
@@ -211,7 +211,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Headquarters</p>
-                      <p className="text-white/40 text-sm mt-0.5">Hyderabad, India</p>
+                      <p className="text-white/40 text-sm mt-0.5">Chennai, Tamil Nadu</p>
                     </div>
                   </div>
 
@@ -227,6 +227,24 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
+
+                  {/* Founder's Portfolio Link */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
+                      <Globe className="w-5 h-5 text-gold" />
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm font-medium">Founder&apos;s Portfolio</p>
+                      <a
+                        href="https://founder-portfolio-steel.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/40 hover:text-gold text-sm mt-0.5 transition-colors duration-250"
+                      >
+                        founder-portfolio-steel.vercel.app
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -237,7 +255,9 @@ export default function Contact() {
                 </p>
                 <div className="flex items-center gap-3">
                   <a
-                    href="#"
+                    href="https://ragas-aerospace.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="Website"
                     className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20
                                flex items-center justify-center

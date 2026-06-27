@@ -39,20 +39,9 @@ export default function RAICTechnology() {
 
   return (
     <section id="raic" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
-      {/* ── Background Circuit Image ── */}
-      {raicBg && (
-        <img
-          src={raicBg}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          style={{ filter: 'brightness(1.3) contrast(1.15)' }}
-        />
-      )}
-
-      {/* ── Dark overlays for text readability ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-950/60 to-navy-950/80 z-10" />
-      <div className="absolute inset-0 bg-grid opacity-15 z-10" />
+      {/* ── Dark blue / black background theme ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-900/50 to-navy-950 z-0" />
+      <div className="absolute inset-0 bg-grid opacity-10 z-10" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Section Header ── */}
