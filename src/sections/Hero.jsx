@@ -155,21 +155,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* ── Scroll indicator — bouncing chevron ── */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-      >
-        <span className="text-[10px] tracking-[0.3em] text-white/30 font-mono uppercase">
-          Scroll
-        </span>
-        <motion.div variants={bounceVariants} animate="animate">
-          <ChevronDown className="w-6 h-6 text-electric/50" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
