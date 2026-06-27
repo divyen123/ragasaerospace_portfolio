@@ -51,9 +51,9 @@ export default function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden flex items-center"
+      className="relative min-h-screen overflow-hidden flex items-center pt-28 md:pt-36 pb-16"
     >
-      {/* ── Video Background (Full width, content shifted right via object-position) ── */}
+      {/* ── Video Background (Full width, content shifted right and slightly up via object-position) ── */}
       {heroVideo && (
         <video
           src={heroVideo}
@@ -61,7 +61,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center md:object-[68%_50%] z-0"
+          className="absolute inset-0 w-full h-full object-cover object-[50%_40%] md:object-[68%_40%] z-0"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
           }}
@@ -73,6 +73,8 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 bg-navy-950/45 pointer-events-none" />
       {/* Subtle vertical gradient to protect the top header and bottom HUD indicators */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-navy-950/60 via-transparent to-navy-950/75 pointer-events-none" />
+      {/* Strong bottom fade gradient to blend video seamlessly into the page background */}
+      <div className="absolute inset-x-0 bottom-0 h-48 z-10 bg-gradient-to-t from-navy-950 via-navy-950/70 to-transparent pointer-events-none" />
 
       {/* ── Particle field ── */}
       <div className="particle-canvas">
@@ -82,7 +84,7 @@ export default function Hero() {
       {/* ── HUD tactical overlay ── */}
       <HUDOverlay />
 
-      {/* ── Main Content (Centered) ── */}
+      {/* ── Main Content (Shifted slightly bottom) ── */}
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full relative z-20">
         <motion.div
           className="text-center max-w-5xl mx-auto flex flex-col items-center"
@@ -122,7 +124,7 @@ export default function Hero() {
             Decisions in the Sky
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons (Smaller sizing) ── */}
           <motion.div
             variants={childVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
@@ -131,8 +133,8 @@ export default function Hero() {
             <a
               href="#raic"
               className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-electric-600 to-electric
-                         text-navy-950 font-heading text-sm font-bold tracking-wider uppercase
-                         rounded-full px-8 py-4 w-full sm:w-auto
+                         text-navy-950 font-heading text-xs font-bold tracking-wider uppercase
+                         rounded-full px-6 py-2.5 w-full sm:w-auto
                          shadow-glow-sm hover:shadow-glow-lg
                          transition-all duration-300 hover:scale-105"
             >
@@ -143,8 +145,8 @@ export default function Hero() {
             <a
               href="#applications"
               className="inline-flex items-center justify-center gap-2 border border-electric/40
-                         text-electric font-heading text-sm font-bold tracking-wider uppercase
-                         rounded-full px-8 py-4 w-full sm:w-auto
+                         text-electric font-heading text-xs font-bold tracking-wider uppercase
+                         rounded-full px-6 py-2.5 w-full sm:w-auto
                          hover:bg-electric/10 hover:border-electric/70
                          transition-all duration-300"
             >
