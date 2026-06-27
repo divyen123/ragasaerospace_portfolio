@@ -6,6 +6,7 @@
    ══════════════════════════════════════════════════════ */
 
 import { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, X } from 'lucide-react';
 import { applications } from '../data/siteData';
@@ -209,29 +210,29 @@ export default function Applications() {
         </motion.div>
       </div>
 
-      {/* ─── Centered Detailed Content Modal ─── */}
-      <AnimatePresence>
-        {selectedApp && activeDetails && (
-          <>
-            {/* Modal Backdrop */}
-            <motion.div
-              className="fixed inset-0 z-[1000] bg-navy-950/80 backdrop-blur-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={() => setSelectedApp(null)}
-            />
+      {/* ─── Centered Detailed Content Modal (Rendered via Portal to escape ancestor CSS transforms) ─── */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {selectedApp && activeDetails && (
+            <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
+              {/* Modal Backdrop */}
+              <motion.div
+                className="fixed inset-0 bg-navy-950/80 backdrop-blur-md"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setSelectedApp(null)}
+              />
 
-            {/* Modal Box wrapper */}
-            <div className="fixed inset-0 z-[1001] flex items-center justify-center p-4 overflow-y-auto">
+              {/* Modal Box wrapper */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 30 }}
                 transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="w-full max-w-2xl bg-navy-900/95 glass border border-electric/35 rounded-2xl shadow-glow-lg
-                           p-6 md:p-8 relative max-h-[85vh] overflow-y-auto"
+                           p-6 md:p-8 relative max-h-[85vh] overflow-y-auto z-[1001]"
               >
                 {/* Close Button */}
                 <button
@@ -282,9 +283,10 @@ export default function Applications() {
                 </div>
               </motion.div>
             </div>
-          </>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
