@@ -246,7 +246,7 @@ export default function Contact() {
                     <Globe className="w-5 h-5 text-gold" />
                   </a>
                   <a
-                    href="#"
+                    href="mailto:ragasaerospace@gmail.com"
                     aria-label="Email"
                     className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20
                                flex items-center justify-center

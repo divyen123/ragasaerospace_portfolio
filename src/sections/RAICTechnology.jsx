@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { raicLayers } from '../data/siteData';
 import SectionHeader from '../components/SectionHeader';
@@ -28,6 +28,14 @@ const cardVariants = {
 export default function RAICTechnology() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [showGlitch, setShowGlitch] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGlitch(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section id="raic" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
@@ -52,7 +60,7 @@ export default function RAICTechnology() {
           title="RAIC™ Technology"
           subtitle="REAL-TIME ADAPTIVE INTELLIGENT CORE"
           accent="blue"
-          glitch={true}
+          glitch={showGlitch}
         />
 
         {/* ── Intro paragraph (High contrast white/85 for readability) ── */}
