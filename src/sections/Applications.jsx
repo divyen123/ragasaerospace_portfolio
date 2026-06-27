@@ -5,7 +5,7 @@
    centered popup modals upon click.
    ══════════════════════════════════════════════════════ */
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, X } from 'lucide-react';
 import { applications } from '../data/siteData';
@@ -26,36 +26,36 @@ const detailedContent = {
     ]
   },
   'Disaster Response & Search and Rescue': {
-    description1: 'RAIC significantly enhances disaster management operations by providing rapid aerial intelligence during emergency situations. The autonomous drone swarm can quickly assess disaster zones, generate real-time situational maps, and support first responders in critical rescue missions.',
-    description2: 'Integrated thermal cameras, depth sensing, and AI analytics enable the detection of survivors, assessment of infrastructure damage, and identification of safe rescue routes, even in hazardous or inaccessible environments.',
+    description1: 'During natural disasters or emergencies, RAIC-powered drones provide rapid deployment capabilities to assist first responders. They map affected areas in real-time, locate missing persons in difficult terrain using thermal vision, and assess structural damage without risking human lives.',
+    description2: 'With autonomous pathfinding and adaptive communication relays, these drones can operate even in areas with destroyed infrastructure. This speed of response and capability is a vital tool for saving lives during critical response windows.',
     capabilities: [
-      'Survivor detection using thermal imaging',
-      'Rapid disaster assessment and damage analysis',
-      'Autonomous search and rescue operations',
-      'Generation of 3D disaster maps and terrain models',
-      'Real-time support for emergency response teams'
+      'Rapid mapping and visual damage assessment',
+      'Thermal imaging search and rescue support',
+      'Emergency supply delivery coordination',
+      'Ad-hoc communications network relay',
+      'Hazardous material detection and monitoring'
     ]
   },
   'Precision Agriculture': {
-    description1: 'The RAIC ecosystem brings next-generation precision agriculture capabilities through AI-driven crop intelligence and autonomous field operations. Using multispectral imaging, thermal sensing, computer vision, and advanced analytics, drones continuously monitor crop health and agricultural productivity.',
-    description2: 'The platform enables farmers to make data-driven decisions by identifying crop stress, diseases, pest infestations, and nutrient deficiencies at an early stage, improving yield while reducing operational costs.',
+    description1: 'Modern agriculture relies on data-driven decisions. RAGAS drones equipped with multispectral sensors analyze crop health, soil moisture levels, and vegetation indices (NDVI) to help farmers optimize resources, detect diseases early, and improve yields.',
+    description2: 'By automating crop spraying and field monitoring, the platform reduces chemical usage and labor costs. This precise approach enhances agricultural efficiency while promoting sustainable farming practices.',
     capabilities: [
-      'Crop health monitoring and NDVI analysis',
-      'Disease and pest detection using AI',
-      'Precision spraying and targeted interventions',
-      'Nutrient deficiency and irrigation assessment',
-      'Yield prediction and farm analytics'
+      'Multispectral crop health and vigor analysis',
+      'Early disease, weed, and pest detection',
+      'Precision spraying and seed distribution',
+      'Soil moisture and irrigation mapping',
+      'Yield forecasting and crop counting'
     ]
   },
   'Industrial Inspection': {
-    description1: 'RAIC-based autonomous drones provide safe, efficient, and cost-effective inspection solutions for critical infrastructure and industrial assets. The system minimizes the need for manual inspections in hazardous environments while delivering accurate and real-time operational intelligence.',
-    description2: 'Using high-resolution imaging, thermal cameras, and AI-powered defect detection, the platform can autonomously inspect power lines, pipelines, telecommunication towers, wind turbines, solar farms, and industrial facilities.',
+    description1: 'RAIC technology automates complex industrial inspection tasks across power lines, wind turbines, pipelines, and manufacturing plants. Drones execute high-precision flight paths close to structures, gathering detailed visual and thermal data for predictive maintenance.',
+    description2: 'AI models analyze the captured media in real-time to identify anomalies like cracks, corrosion, hot spots, or component wear, reducing operational downtime and eliminating human safety risks associated with high-altitude climbs.',
     capabilities: [
-      'Autonomous infrastructure inspection missions',
-      'AI-based anomaly and defect detection',
-      'Thermal inspection for predictive maintenance',
-      'Inspection of power lines, pipelines, and industrial assets',
-      'Reduced operational risks and downtime'
+      'Automated close-proximity infrastructure inspection',
+      'Real-time thermal hotspot and anomaly detection',
+      'High-resolution crack and corrosion mapping',
+      'Predictive maintenance database integration',
+      'Confined space and high-altitude flight operations'
     ]
   },
   'Construction Monitoring': {
@@ -63,33 +63,33 @@ const detailedContent = {
     description2: 'High-resolution imagery, photogrammetry, and AI-powered analytics provide project stakeholders with accurate visual insights and measurable progress reports throughout the construction lifecycle.',
     capabilities: [
       'Real-time construction progress monitoring',
-      'Automated site inspections and reporting',
       'Volumetric analysis and stockpile measurement',
-      '3D site reconstruction and digital twins',
-      'Enhanced safety and operational efficiency'
+      'Enhanced safety and operational efficiency',
+      'Automated site inspections and reporting',
+      '3D site reconstruction and digital twins'
     ]
   },
   'Mapping & Surveying': {
-    description1: 'RAIC delivers highly accurate aerial mapping and surveying solutions for infrastructure development, land management, urban planning, and environmental monitoring. Autonomous missions combined with advanced sensor fusion technologies ensure rapid and reliable geospatial data collection.',
-    description2: 'The platform supports photogrammetry, LiDAR integration, and high-precision GNSS technologies to generate detailed orthomosaic maps, terrain models, and three-dimensional reconstructions.',
+    description1: 'High-resolution photogrammetry and LiDAR payloads on RAGAS drones enable rapid, accurate mapping of large-scale terrains. The system generates precise 3D digital elevation models, orthomosaics, and point clouds for geological, urban planning, and surveying uses.',
+    description2: 'Autonomous survey patterns and post-processing integrations streamline workflow times, delivering GIS-grade geospatial accuracy across vast or inaccessible landscapes.',
     capabilities: [
-      'High-resolution aerial photogrammetry',
-      'Topographic and cadastral mapping',
-      'LiDAR-based terrain modelling',
-      'Generation of 3D digital elevation models',
-      'Fast, accurate, and cost-efficient surveying operations'
+      'High-resolution topographic mapping',
+      'LiDAR point cloud generation and analysis',
+      'Geospatial data integration for GIS applications',
+      'Volumetric terrain mapping and contours',
+      'Autonomous survey mission pathfinding'
     ]
   }
 };
 
-/* ── Gradient map for application types ── */
+/* ── Accent gradient maps ── */
 const gradientMap = [
-  'from-red-500 to-orange-500',
-  'from-orange-500 to-amber-500',
-  'from-green-500 to-emerald-500',
-  'from-blue-500 to-cyan-500',
-  'from-amber-500 to-yellow-500',
-  'from-purple-500 to-indigo-500',
+  'from-orange-500 to-red-600',
+  'from-amber-500 to-orange-600',
+  'from-emerald-500 to-teal-600',
+  'from-blue-500 to-indigo-600',
+  'from-yellow-500 to-amber-600',
+  'from-purple-500 to-pink-600',
 ];
 
 /* ── Animation variants ── */
@@ -116,6 +116,18 @@ export default function Applications() {
   const [selectedApp, setSelectedApp] = useState(null);
 
   const activeDetails = selectedApp ? detailedContent[selectedApp.title] : null;
+
+  // Lock body scroll when modal is open to keep it fixed and centered
+  useEffect(() => {
+    if (selectedApp) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedApp]);
 
   return (
     <section id="applications" ref={sectionRef} className="py-24 md:py-32 bg-mesh relative">

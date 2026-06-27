@@ -1,14 +1,11 @@
-/* ══════════════════════════════════════════════════════
-   RAGAS AEROSPACE — Contact Section
-   Two-column layout: contact form + company info card.
-   All inputs are controlled with useState.
-   ══════════════════════════════════════════════════════ */
-
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Globe, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Globe, Mail, MapPin, Send } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import GlassCard from '../components/GlassCard';
+
+/* ── Asset import ── */
+import raicBg from '../assets/images/raic-bg.png';
 
 /* ── Animation variants ── */
 const slideInLeft = {
@@ -60,8 +57,23 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
+      {/* ── Background Circuit Image ── */}
+      {raicBg && (
+        <img
+          src={raicBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          style={{ filter: 'brightness(1.3) contrast(1.15)' }}
+        />
+      )}
+
+      {/* ── Dark overlays for text readability ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/80 to-navy-950/95 z-10" />
+      <div className="absolute inset-0 bg-grid opacity-15 z-10" />
+
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Section Header ── */}
         <SectionHeader
           title="Contact"
@@ -174,13 +186,13 @@ export default function Contact() {
             </GlassCard>
           </motion.div>
 
-          {/* ─── Right: Company Info Card ─── */}
+          {/* ─── Right: Company Info Card (50% transparent background) ─── */}
           <motion.div
             variants={slideInRight}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
           >
-            <div className="glass-gold rounded-2xl p-6 md:p-8 h-full flex flex-col justify-between">
+            <div className="bg-navy-950/35 border border-gold/15 backdrop-blur-md rounded-2xl p-6 md:p-8 h-full flex flex-col justify-between">
               {/* Heading */}
               <div>
                 <h3 className="font-heading text-2xl gradient-text-gold mb-2">
@@ -210,18 +222,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Email</p>
-                      <p className="text-white/40 text-sm mt-0.5">contact@ragasaerospace.com</p>
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5 text-gold" />
-                    </div>
-                    <div>
-                      <p className="text-white/70 text-sm font-medium">Phone</p>
-                      <p className="text-white/40 text-sm mt-0.5">+91 XXXXX XXXXX</p>
+                      <a href="mailto:ragasaerospace@gmail.com" className="text-white/40 hover:text-gold text-sm mt-0.5 transition-colors duration-250">
+                        ragasaerospace@gmail.com
+                      </a>
                     </div>
                   </div>
                 </div>

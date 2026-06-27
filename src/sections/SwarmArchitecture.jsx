@@ -77,9 +77,8 @@ export default function SwarmArchitecture() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  /* ── Frame loop for 3D rotation (pause on hover) ── */
+  /* ── Frame loop for 3D rotation (always spin) ── */
   useEffect(() => {
-    if (isHovered) return;
     let animationFrameId;
     const updateRotation = () => {
       setAngle((prev) => prev + 0.004); // Speed factor
@@ -87,7 +86,7 @@ export default function SwarmArchitecture() {
     };
     animationFrameId = requestAnimationFrame(updateRotation);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isHovered]);
+  }, []);
 
   const isMobile = windowWidth < 768;
   const radius = isMobile ? 120 : 340; // Desktop radius of rotation
@@ -102,11 +101,7 @@ export default function SwarmArchitecture() {
         />
 
         {/* ─── 3D Rotating Carousel Container (Clean & Borderless) ─── */}
-        <div
-          className="relative w-full h-[320px] md:h-[450px] mt-8 flex justify-center items-center pointer-events-auto"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="relative w-full h-[320px] md:h-[450px] mt-8 flex justify-center items-center pointer-events-auto">
           {/* Ambient glow behind carousel */}
           <div className="absolute inset-0 bg-mesh opacity-30 pointer-events-none" />
 
@@ -117,9 +112,10 @@ export default function SwarmArchitecture() {
             const isHex = node.id.startsWith('hex');
 
             /* ── Compute 3D coords & values ── */
-            const cardAngle = angle + (i * Math.PI * 2) / swarmNodes.length;
-            const x = Math.sin(cardAngle) * radius;
-            const z = Math.cos(cardAngle); // [-1, 1]
+            const cardAngle = cardAngleVal => cardAngleVal + (i * Math.PI * 2) / swarmNodes.length;
+            const computedAngle = cardAngle(angle);
+            const x = Math.sin(computedAngle) * radius;
+            const z = Math.cos(computedAngle); // [-1, 1]
             const normalizedZ = (z + 1) / 2; // [0, 1]
 
             // Interpolate scale & opacity
@@ -184,10 +180,17 @@ export default function SwarmArchitecture() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {infoCards.map((card) => {
+          {infoCards.map((card, index) => {
             const Icon = card.icon;
+            const delay = `${index * 2.5}s`;
+
             return (
-              <motion.div key={card.title} variants={cardVariants}>
+              <motion.div
+                key={card.title}
+                variants={cardVariants}
+                className="periodic-shake"
+                style={{ animationDelay: delay }}
+              >
                 <GlassCard className="p-6 h-full text-center">
                   <div className="w-12 h-12 rounded-full bg-electric/10 border border-electric/20 flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-6 h-6 text-electric" />

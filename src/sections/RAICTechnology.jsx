@@ -38,12 +38,13 @@ export default function RAICTechnology() {
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover z-0"
+          style={{ filter: 'brightness(1.3) contrast(1.15)' }}
         />
       )}
 
       {/* ── Dark overlays for text readability ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-950/85 to-navy-950 z-10" />
-      <div className="absolute inset-0 bg-grid opacity-25 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-950/60 to-navy-950/80 z-10" />
+      <div className="absolute inset-0 bg-grid opacity-15 z-10" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Section Header ── */}
@@ -51,6 +52,7 @@ export default function RAICTechnology() {
           title="RAIC™ Technology"
           subtitle="REAL-TIME ADAPTIVE INTELLIGENT CORE"
           accent="blue"
+          glitch={true}
         />
 
         {/* ── Intro paragraph (High contrast white/85 for readability) ── */}

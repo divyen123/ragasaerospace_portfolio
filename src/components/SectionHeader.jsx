@@ -19,6 +19,7 @@ export default function SectionHeader({
   subtitle,
   accent = 'blue',
   align = 'center',
+  glitch = false,
 }) {
   /* ── Accent-based styles ── */
   const isGold = accent === 'gold';
@@ -59,9 +60,11 @@ export default function SectionHeader({
 
       {/* ── Main Title ── */}
       <h2
+        data-text={title}
         className={`
           text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white
           ${titleGlow}
+          ${glitch ? 'glitch-text' : ''}
         `}
       >
         {title}
