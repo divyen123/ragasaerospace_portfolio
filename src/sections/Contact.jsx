@@ -45,15 +45,47 @@ export default function Contact() {
     subject: '',
     message: '',
   });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission logic would go here
-    console.log('Form submitted:', formData);
+    setStatus('sending');
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/ragasaerospace@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'General Inquiry',
+          message: formData.message,
+          _subject: `Ragas Aerospace Contact: ${formData.subject || 'General'}`
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -172,16 +204,31 @@ export default function Contact() {
                 {/* Submit Button */}
                 <button
                   type="submit"
+                  disabled={status === 'sending'}
                   className="w-full flex items-center justify-center gap-2
                              bg-gradient-to-r from-electric-600 to-electric
                              text-navy-950 font-heading text-sm font-bold tracking-wider uppercase
                              rounded-full px-8 py-4
                              shadow-glow-sm hover:shadow-glow-lg
-                             transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                             transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+                             disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
-                  Send Message
+                  {status === 'sending' ? 'Sending Message...' : 'Send Message'}
                 </button>
+
+                {/* Status Messages */}
+                {status === 'success' && (
+                  <div className="bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
+                    Message sent successfully! FormSubmit will send a confirmation link to <strong>ragasaerospace@gmail.com</strong> if this is the first submission. Please check your email to activate it.
+                  </div>
+                )}
+
+                {status === 'error' && (
+                  <div className="bg-rose-950/50 border border-rose-500/40 text-rose-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
+                    Oops! Something went wrong. Please try again or email us directly at <strong>ragasaerospace@gmail.com</strong>.
+                  </div>
+                )}
               </form>
             </GlassCard>
           </motion.div>
