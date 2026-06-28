@@ -4,7 +4,7 @@
    HUD overlay, and staggered entrance animations.
    ══════════════════════════════════════════════════════ */
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
@@ -46,6 +46,27 @@ const bounceVariants = {
 export default function Hero() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [videoReached80, setVideoReached80] = useState(false);
+
+  useEffect(() => {
+    if (videoReached80) return;
+    // Fallback timer (6 seconds) if video fails to load/play or trigger timeupdate
+    const timer = setTimeout(() => {
+      setVideoReached80(true);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [videoReached80]);
+
+  const handleTimeUpdate = (e) => {
+    if (videoReached80) return;
+    const video = e.currentTarget;
+    if (video.duration) {
+      const progress = video.currentTime / video.duration;
+      if (progress >= 0.8) {
+        setVideoReached80(true);
+      }
+    }
+  };
 
   return (
     <section
@@ -61,6 +82,7 @@ export default function Hero() {
           muted
           loop
           playsInline
+          onTimeUpdate={handleTimeUpdate}
           className="absolute inset-0 w-full h-full object-cover object-[50%_40%] md:object-[68%_40%] z-0"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
@@ -90,7 +112,7 @@ export default function Hero() {
           className="text-center max-w-5xl mx-auto flex flex-col items-center"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          animate={videoReached80 && isInView ? 'visible' : 'hidden'}
         >
           {/* Tag line — small label */}
           <motion.p
