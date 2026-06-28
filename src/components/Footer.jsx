@@ -50,7 +50,7 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-4">
             {/* Logo */}
             <div className="font-heading text-xl tracking-wider">
-              <span className="text-gold text-glow-gold">RAGAS</span>{' '}
+              <span className="text-white text-glow">RAGAS</span>{' '}
               <span className="text-electric text-glow">AEROSPACE</span>
             </div>
 
@@ -68,8 +68,8 @@ export default function Footer() {
 
             {/* Indigenous Innovation Badge */}
             <div className="inline-flex items-center gap-2 glass-light rounded-full px-4 py-2 mt-2">
-              <Rocket size={14} className="text-gold" />
-              <span className="text-[11px] font-mono text-gold/80 tracking-wider uppercase">
+              <Rocket size={14} className="text-electric" />
+              <span className="text-[11px] font-mono text-electric/80 tracking-wider uppercase">
                 Indigenous Aerospace Innovation
               </span>
             </div>

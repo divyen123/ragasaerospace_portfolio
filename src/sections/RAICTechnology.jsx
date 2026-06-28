@@ -98,14 +98,9 @@ export default function RAICTechnology() {
                   scale: 1.03,
                   boxShadow: '0 0 40px rgba(0,180,255,0.25)',
                 }}
-                className={`lg:col-span-2 ${colStart}`}
+                className={`lg:col-span-2 rounded-2xl overflow-hidden ${colStart}`}
               >
                 <GlassCard className="h-full p-6 relative overflow-hidden group">
-                  {/* Top accent border */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${layer.color}`}
-                  />
-
                   {/* Icon circle */}
                   <div
                     className={`w-14 h-14 rounded-full bg-gradient-to-br ${layer.color}
@@ -116,7 +111,7 @@ export default function RAICTechnology() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-heading text-lg text-white mb-2">
+                  <h3 className="font-body font-bold text-lg text-white mb-2">
                     {layer.title}
                   </h3>
 

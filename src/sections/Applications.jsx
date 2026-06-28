@@ -137,7 +137,7 @@ export default function Applications() {
         <SectionHeader
           title="Applications"
           subtitle="MISSION-CRITICAL DEPLOYMENTS"
-          accent="gold"
+          accent="blue"
         />
 
         {/* ── Application Cards Grid ── */}
@@ -161,14 +161,9 @@ export default function Applications() {
                 }}
                 transition={{ duration: 0.3 }}
                 onClick={() => setSelectedApp({ ...app, gradient })}
+                className="rounded-2xl overflow-hidden"
               >
                 <GlassCard className="relative h-full p-6 group overflow-hidden cursor-pointer">
-                  {/* Top accent line */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${gradient}
-                                opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
-                  />
-
                   {/* Icon */}
                   <div
                     className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradient}
@@ -179,7 +174,7 @@ export default function Applications() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-heading text-lg text-white mb-3 group-hover:text-glow transition-all duration-300">
+                  <h3 className="font-body font-bold text-lg text-white mb-3 group-hover:text-glow transition-all duration-300">
                     {app.title}
                   </h3>
 

@@ -103,7 +103,7 @@ export default function Navbar() {
             onClick={(e) => handleNavClick(e, '#home')}
             className="flex items-center gap-1 font-heading text-xl md:text-2xl tracking-wider"
           >
-            <span className="text-gold text-glow-gold">RAGAS</span>
+            <span className="text-white text-glow">RAGAS</span>
             <span className="text-electric text-glow">AEROSPACE</span>
           </a>
 

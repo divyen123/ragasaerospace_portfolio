@@ -124,9 +124,9 @@ export default function SwarmArchitecture() {
               : 0.65 + normalizedZ * 0.35; // [0.65, 1] on desktop
             const opacity = 0.25 + normalizedZ * 0.75; // [0.25, 1]
 
-            /* Border class: gold for GCS, electric blue for leaders, lighter for units */
+            /* Border class: electric blue for GCS and leaders, lighter for units */
             const borderClass = isGCS
-              ? 'border-gold/50 shadow-glow-gold/20'
+              ? 'border-electric/70 shadow-glow-md'
               : isHex
               ? 'border-electric/50 shadow-glow-sm'
               : 'border-electric/20';
@@ -152,14 +152,12 @@ export default function SwarmArchitecture() {
                 <div className="hud-corner hud-corner-br w-3 h-3 border-electric/30" />
 
                 {/* Card Icon */}
-                <div className={`w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-3 md:mb-5
-                                 ${isGCS ? 'bg-gold/10' : 'bg-electric/10'}`}>
-                  <Icon className={`w-5 h-5 md:w-7 md:h-7 ${isGCS ? 'text-gold' : 'text-electric'}`} />
+                <div className="w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-3 md:mb-5 bg-electric/10">
+                  <Icon className="w-5 h-5 md:w-7 md:h-7 text-electric" />
                 </div>
 
                 {/* Node Label */}
-                <h4 className={`font-heading text-xs md:text-sm tracking-wider font-bold mb-1 md:mb-2
-                                ${isGCS ? 'text-gold text-glow-gold' : 'text-white text-glow'}`}>
+                <h4 className="font-heading text-xs md:text-sm tracking-wider font-bold mb-1 md:mb-2 text-white text-glow">
                   {node.label}
                 </h4>
 

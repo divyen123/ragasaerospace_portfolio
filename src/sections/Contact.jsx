@@ -110,7 +110,7 @@ export default function Contact() {
         <SectionHeader
           title="Contact"
           subtitle="GET IN TOUCH"
-          accent="gold"
+          accent="blue"
         />
 
         {/* ── Tagline ── */}
@@ -239,10 +239,10 @@ export default function Contact() {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
           >
-            <div className="bg-navy-950/35 border border-gold/15 backdrop-blur-md rounded-2xl p-6 md:p-8 h-full flex flex-col justify-between">
+            <div className="bg-navy-950/35 border border-electric/15 backdrop-blur-md rounded-2xl p-6 md:p-8 h-full flex flex-col justify-between">
               {/* Heading */}
               <div>
-                <h3 className="font-heading text-2xl gradient-text-gold mb-2">
+                <h3 className="font-heading text-2xl text-white text-glow mb-2">
                   RAGAS AEROSPACE
                 </h3>
                 <p className="text-white/40 text-sm mb-8">
@@ -253,8 +253,8 @@ export default function Contact() {
                 <div className="space-y-5">
                   {/* Address */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5 text-gold" />
+                    <div className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20 flex items-center justify-center shrink-0">
+                      <MapPin className="w-5 h-5 text-electric" />
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Headquarters</p>
@@ -264,12 +264,12 @@ export default function Contact() {
 
                   {/* Email */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5 text-gold" />
+                    <div className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20 flex items-center justify-center shrink-0">
+                      <Mail className="w-5 h-5 text-electric" />
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Email</p>
-                      <a href="mailto:ragasaerospace@gmail.com" className="text-white/40 hover:text-gold text-sm mt-0.5 transition-colors duration-250">
+                      <a href="mailto:ragasaerospace@gmail.com" className="text-white/40 hover:text-electric text-sm mt-0.5 transition-colors duration-250">
                         ragasaerospace@gmail.com
                       </a>
                     </div>
@@ -277,8 +277,8 @@ export default function Contact() {
 
                   {/* Founder's Portfolio Link */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                      <Globe className="w-5 h-5 text-gold" />
+                    <div className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20 flex items-center justify-center shrink-0">
+                      <Globe className="w-5 h-5 text-electric" />
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Founder&apos;s Portfolio</p>
@@ -286,7 +286,7 @@ export default function Contact() {
                         href="https://founder-portfolio-steel.vercel.app"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/40 hover:text-gold text-sm mt-0.5 transition-colors duration-250"
+                        className="text-white/40 hover:text-electric text-sm mt-0.5 transition-colors duration-250"
                       >
                         founder-portfolio-steel.vercel.app
                       </a>
@@ -296,7 +296,7 @@ export default function Contact() {
               </div>
 
               {/* Social links */}
-              <div className="mt-10 pt-6 border-t border-gold/10">
+              <div className="mt-10 pt-6 border-t border-electric/10">
                 <p className="text-xs text-white/30 font-mono tracking-widest uppercase mb-4">
                   Connect With Us
                 </p>
@@ -306,20 +306,20 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Website"
-                    className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20
+                    className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20
                                flex items-center justify-center
-                               hover:bg-gold/20 hover:border-gold/40 transition-all duration-200"
+                               hover:bg-electric/20 hover:border-electric/40 transition-all duration-200"
                   >
-                    <Globe className="w-5 h-5 text-gold" />
+                    <Globe className="w-5 h-5 text-electric" />
                   </a>
                   <a
                     href="mailto:ragasaerospace@gmail.com"
                     aria-label="Email"
-                    className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20
+                    className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20
                                flex items-center justify-center
-                               hover:bg-gold/20 hover:border-gold/40 transition-all duration-200"
+                               hover:bg-electric/20 hover:border-electric/40 transition-all duration-200"
                   >
-                    <Mail className="w-5 h-5 text-gold" />
+                    <Mail className="w-5 h-5 text-electric" />
                   </a>
                 </div>
               </div>

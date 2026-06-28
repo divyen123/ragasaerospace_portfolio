@@ -103,7 +103,7 @@ export default function Hero() {
           {/* Company name — RAGAS */}
           <motion.h1
             variants={childVariants}
-            className="text-6xl md:text-8xl font-heading font-black gradient-text-gold leading-none"
+            className="text-6xl md:text-8xl font-heading font-black text-white leading-none text-glow-strong"
           >
             RAGAS
           </motion.h1>

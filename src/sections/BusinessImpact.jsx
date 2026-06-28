@@ -221,7 +221,7 @@ export default function BusinessImpact() {
             onClick={() => setCurrent(i)}
             className={`h-1.5 rounded-full transition-all duration-500 ${
               i === current
-                ? 'w-8 bg-gold'
+                ? 'w-8 bg-electric'
                 : 'w-3 bg-white/20 hover:bg-white/40'
             }`}
             aria-label={`Go to slide ${i + 1}`}
