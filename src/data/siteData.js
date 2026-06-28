@@ -170,7 +170,7 @@ export const applications = [
 
 /* ── Performance Stats ── */
 export const performanceStats = [
-  { value: 15, suffix: ' km', label: 'Communication Range', icon: Wifi },
+  { value: 30, suffix: ' km', label: 'Communication Range', icon: Wifi },
   { value: 35, suffix: '+ min', label: 'Flight Endurance', icon: Timer },
   { value: 100, suffix: '%', label: 'Real-Time Telemetry', icon: Radio },
   { value: 4, suffix: 'K', label: 'Live Video Streaming', icon: Video },
