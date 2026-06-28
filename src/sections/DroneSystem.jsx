@@ -171,18 +171,18 @@ export default function DroneSystem() {
           viewport={{ once: true, margin: '-100px' }}
         >
           {/* NVIDIA Jetson */}
-          <div className="glass-gold rounded-2xl p-6 text-center hover:shadow-glow-gold transition-shadow duration-300">
-            <Cpu className="w-8 h-8 text-gold mx-auto mb-3" />
-            <p className="font-heading text-sm text-gold tracking-widest">
+          <div className="glass rounded-2xl p-6 text-center hover:shadow-glow-md transition-shadow duration-300">
+            <Cpu className="w-8 h-8 text-electric mx-auto mb-3" />
+            <p className="font-heading text-sm text-electric tracking-widest text-glow-sm">
               NVIDIA JETSON
             </p>
             <p className="text-xs text-white/40 mt-1">Edge AI Compute</p>
           </div>
 
           {/* CrossFlight */}
-          <div className="glass-gold rounded-2xl p-6 text-center hover:shadow-glow-gold transition-shadow duration-300">
-            <Joystick className="w-8 h-8 text-gold mx-auto mb-3" />
-            <p className="font-heading text-sm text-gold tracking-widest">
+          <div className="glass rounded-2xl p-6 text-center hover:shadow-glow-md transition-shadow duration-300">
+            <Joystick className="w-8 h-8 text-electric mx-auto mb-3" />
+            <p className="font-heading text-sm text-electric tracking-widest text-glow-sm">
               CROSSFLIGHT V1.1
             </p>
             <p className="text-xs text-white/40 mt-1">Flight Controller</p>
@@ -197,8 +197,8 @@ export default function DroneSystem() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="glass-gold rounded-full px-6 py-2 shadow-glow-gold">
-            <span className="font-heading text-xs text-gold tracking-[0.3em]">
+          <div className="glass rounded-full px-6 py-2 shadow-glow-sm border border-electric/30">
+            <span className="font-heading text-xs text-electric tracking-[0.3em] text-glow-sm">
               RAIC™ POWERED AUTONOMOUS PLATFORM
             </span>
           </div>

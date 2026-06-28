@@ -193,11 +193,6 @@ export default function Applications() {
                     <ArrowRight className="w-4 h-4" />
                   </div>
 
-                  {/* Hover glow overlay */}
-                  <div
-                    className="absolute inset-0 rounded-xl border border-transparent
-                               group-hover:border-electric/30 transition-all duration-300 pointer-events-none"
-                  />
                 </GlassCard>
               </motion.div>
             );
