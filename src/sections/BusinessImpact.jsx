@@ -126,7 +126,7 @@ export default function BusinessImpact() {
                           const isSelected = hoveredMarketSeg?.label === seg.label;
 
                           return (
-                            <circle
+                            <motion.circle
                               key={seg.label}
                               cx="60"
                               cy="60"
@@ -135,7 +135,10 @@ export default function BusinessImpact() {
                               stroke={seg.color}
                               strokeWidth={isSelected ? 14 : 10}
                               strokeDasharray={circumference}
-                              strokeDashoffset={offset}
+                              initial={{ strokeDashoffset: circumference }}
+                              whileInView={{ strokeDashoffset: offset }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
                               transform={`rotate(${rotation - 90} 60 60)`}
                               className="transition-all duration-300 cursor-pointer"
                               onMouseEnter={() => setHoveredMarketSeg(seg)}
@@ -146,11 +149,8 @@ export default function BusinessImpact() {
                       })()}
                     </svg>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                      <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase">
-                        {hoveredMarketSeg ? 'Share' : 'Total'}
-                      </span>
-                      <span className="text-lg font-body font-bold text-white text-glow-sm mt-0.5">
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="text-sm font-body font-bold text-white text-glow-sm">
                         {hoveredMarketSeg ? `${hoveredMarketSeg.value}%` : '100%'}
                       </span>
                     </div>
@@ -200,7 +200,7 @@ export default function BusinessImpact() {
                           const isSelected = hoveredRevenueSeg?.label === seg.label;
 
                           return (
-                            <circle
+                            <motion.circle
                               key={seg.label}
                               cx="60"
                               cy="60"
@@ -209,7 +209,10 @@ export default function BusinessImpact() {
                               stroke={seg.color}
                               strokeWidth={isSelected ? 14 : 10}
                               strokeDasharray={circumference}
-                              strokeDashoffset={offset}
+                              initial={{ strokeDashoffset: circumference }}
+                              whileInView={{ strokeDashoffset: offset }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
                               transform={`rotate(${rotation - 90} 60 60)`}
                               className="transition-all duration-300 cursor-pointer"
                               onMouseEnter={() => setHoveredRevenueSeg(seg)}
@@ -220,11 +223,8 @@ export default function BusinessImpact() {
                       })()}
                     </svg>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                      <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase">
-                        {hoveredRevenueSeg ? 'Share' : 'Total'}
-                      </span>
-                      <span className="text-lg font-body font-bold text-white text-glow-sm mt-0.5">
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="text-sm font-body font-bold text-white text-glow-sm">
                         {hoveredRevenueSeg ? `${hoveredRevenueSeg.value}%` : '100%'}
                       </span>
                     </div>
@@ -272,6 +272,17 @@ export default function BusinessImpact() {
                         <stop offset="0%" stopColor="#00b4ff" stopOpacity="0.4" />
                         <stop offset="100%" stopColor="#00b4ff" stopOpacity="0.0" />
                       </linearGradient>
+                      <clipPath id="areaClip">
+                        <motion.rect
+                          x="0"
+                          y="0"
+                          height="110"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: 240 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1.5, ease: 'easeOut' }}
+                        />
+                      </clipPath>
                     </defs>
                     
                     {/* Grid lines */}
@@ -279,17 +290,19 @@ export default function BusinessImpact() {
                     <line x1="30" y1="55" x2="220" y2="55" stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3" />
                     <line x1="30" y1="90" x2="220" y2="90" stroke="rgba(255,255,255,0.08)" />
 
-                    {/* Fills & Lines */}
-                    <path
-                      d="M 30,90 Q 75,85 120,55 T 210,20 L 210,90 Z"
-                      fill="url(#areaGrad)"
-                    />
-                    <path
-                      d="M 30,90 Q 75,85 120,55 T 210,20"
-                      fill="none"
-                      stroke="#00b4ff"
-                      strokeWidth="2.5"
-                    />
+                    {/* Fills & Lines inside a group with the clip path */}
+                    <g clipPath="url(#areaClip)">
+                      <path
+                        d="M 30,90 Q 75,85 120,55 T 210,20 L 210,90 Z"
+                        fill="url(#areaGrad)"
+                      />
+                      <path
+                        d="M 30,90 Q 75,85 120,55 T 210,20"
+                        fill="none"
+                        stroke="#00b4ff"
+                        strokeWidth="2.5"
+                      />
+                    </g>
 
                     {/* Nodes */}
                     {[
@@ -298,9 +311,13 @@ export default function BusinessImpact() {
                       { x: 210, y: 20, val: '100+ Jobs', label: 'Phase III' },
                     ].map((node, i) => (
                       <g key={i} className="cursor-pointer" onMouseEnter={() => setHoveredJob(node)} onMouseLeave={() => setHoveredJob(null)}>
-                        <circle
+                        <motion.circle
                           cx={node.x}
                           cy={node.y}
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.8 + i * 0.2, type: 'spring', stiffness: 200 }}
                           r={hoveredJob?.label === node.label ? 6 : 4}
                           className="fill-navy-950 stroke-electric"
                           strokeWidth="2.5"
@@ -357,11 +374,13 @@ export default function BusinessImpact() {
                           {/* Bar background track */}
                           <rect x={x} y="15" width={barWidth} height="70" rx="3" className="fill-white/[0.03]" />
                           {/* Filled bar */}
-                          <rect
+                          <motion.rect
                             x={x}
-                            y={y}
+                            initial={{ y: 85, height: 0 }}
+                            whileInView={{ y: y, height: barHeight }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.0, ease: 'easeOut', delay: i * 0.1 }}
                             width={barWidth}
-                            height={barHeight}
                             rx="3"
                             fill={benefit.color}
                             className="transition-all duration-300 opacity-80 hover:opacity-100"
@@ -370,9 +389,17 @@ export default function BusinessImpact() {
                             }}
                           />
                           {/* Value label */}
-                          <text x={x + barWidth / 2} y={y - 4} textAnchor="middle" className="fill-white/80 font-mono text-[9px] font-bold">
+                          <motion.text
+                            x={x + barWidth / 2}
+                            initial={{ opacity: 0, y: 80 }}
+                            whileInView={{ opacity: 1, y: y - 4 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.0, ease: 'easeOut', delay: i * 0.1 }}
+                            textAnchor="middle"
+                            className="fill-white/80 font-mono text-[9px] font-bold"
+                          >
                             {benefit.value}%
-                          </text>
+                          </motion.text>
                         </g>
                       );
                     })}
