@@ -173,7 +173,7 @@ export default function DroneSystem() {
           {/* NVIDIA Jetson */}
           <div className="glass rounded-2xl p-6 text-center hover:shadow-glow-md transition-shadow duration-300">
             <Cpu className="w-8 h-8 text-electric mx-auto mb-3" />
-            <p className="font-heading text-sm text-electric tracking-widest text-glow-sm">
+            <p className="font-heading text-sm text-white tracking-widest text-glow-sm">
               NVIDIA JETSON
             </p>
             <p className="text-xs text-white/40 mt-1">Edge AI Compute</p>
@@ -182,7 +182,7 @@ export default function DroneSystem() {
           {/* CrossFlight */}
           <div className="glass rounded-2xl p-6 text-center hover:shadow-glow-md transition-shadow duration-300">
             <Joystick className="w-8 h-8 text-electric mx-auto mb-3" />
-            <p className="font-heading text-sm text-electric tracking-widest text-glow-sm">
+            <p className="font-heading text-sm text-white tracking-widest text-glow-sm">
               CROSSFLIGHT V1.1
             </p>
             <p className="text-xs text-white/40 mt-1">Flight Controller</p>
