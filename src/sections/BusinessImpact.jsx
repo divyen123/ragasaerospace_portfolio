@@ -1,29 +1,29 @@
 /* ══════════════════════════════════════════════════════
    RAGAS AEROSPACE — Business Impact Section
-   Interactive Startup Pitch Dashboard & Investor Report.
-   Fully responsive layout with custom interactive SVG charts:
-   Doughnut charts, progress bar charts, and data toggles.
+   High-Tech Interactive Investment Dashboard & Pitch Report.
+   Proportion: 60% Dashboard (Left) | 40% Pitch Report (Right).
+   Spacious design with custom SVG Pie, Line, and Column charts.
+   Uses font-body font-bold for clean modern headers.
    ══════════════════════════════════════════════════════ */
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   TrendingUp,
-  BarChart3,
-  PieChart,
-  Globe,
-  Shield,
-  Zap,
+  Activity,
   Users,
   Award,
-  Activity,
-  FileText,
+  Zap,
   CheckCircle2,
-  ArrowRight,
+  Cpu,
+  Joystick,
+  Globe,
+  Mail,
+  MapPin,
 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 
-/* ── Chart Segment Constants ── */
+/* ── Data Structures ── */
 const marketSegments = [
   { label: 'Defence & Security', value: 35, color: '#3b82f6' },      // Blue
   { label: 'Industrial Inspection', value: 25, color: '#10b981' },   // Green
@@ -40,39 +40,37 @@ const revenueSegments = [
   { label: 'Analytics Services', value: 8, color: '#a855f7' },
 ];
 
-const operationalImprovements = [
-  { label: 'Situational Awareness', value: 80, desc: 'Live multi-drone feeds' },
-  { label: 'Response Time Improvement', value: 70, desc: '60-70% faster victim search' },
-  { label: 'Mission Efficiency', value: 65, desc: 'Swarm path optimization' },
-  { label: 'Manpower Reduction', value: 55, desc: 'Autonomous patrol fleets' },
-  { label: 'Inspection Cost Reduction', value: 50, desc: '40-50% lower logistics' },
+const benefitsData = [
+  { label: 'Disaster Assessment', value: 70, color: '#3b82f6', desc: '60-70% time reduction' },
+  { label: 'Industrial Inspection', value: 50, color: '#10b981', desc: '40-50% cost reduction' },
+  { label: 'Surveillance Dependency', value: 80, color: '#f97316', desc: '80% manpower reduction' },
+  { label: 'Agricultural Yield', value: 20, color: '#eab308', desc: '15-20% efficiency increase' },
 ];
 
-const techCapabilities = [
-  { label: 'RAIC Ecosystem', value: 90, color: 'from-electric to-cyan-400' },
-  { label: 'Skydio', value: 85, color: 'from-blue-600 to-blue-400' },
-  { label: 'DJI Enterprise', value: 75, color: 'from-slate-600 to-slate-400' },
-  { label: 'Parrot ANAFI AI', value: 70, color: 'from-slate-700 to-slate-500' },
+const employmentData = [
+  { phase: 'Phase I', jobs: 15, desc: '10-15 direct R&D roles' },
+  { phase: 'Phase II', jobs: 50, desc: '25-50 production roles' },
+  { phase: 'Phase III', jobs: 100, desc: '100+ direct/indirect' },
 ];
 
 export default function BusinessImpact() {
-  const [activeChartTab, setActiveChartTab] = useState('market'); // 'market' | 'performance'
-  const [activeReportTab, setActiveReportTab] = useState('problems'); // 'problems' | 'employment' | 'strategic'
+  const [activeReportTab, setActiveReportTab] = useState('problems');
   const [hoveredMarketSeg, setHoveredMarketSeg] = useState(null);
   const [hoveredRevenueSeg, setHoveredRevenueSeg] = useState(null);
+  const [hoveredBenefit, setHoveredBenefit] = useState(null);
+  const [hoveredJob, setHoveredJob] = useState(null);
 
-  /* ── Donut Arc Calculation Helper ── */
-  const circumference = 2 * Math.PI * 40; // 251.33
+  const circumference = 2 * Math.PI * 30; // 188.5
 
   return (
-    <section id="business-impact" className="relative py-24 md:py-32 overflow-hidden bg-navy-950">
-      {/* Background grids */}
-      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-950/50 to-navy-950/90 pointer-events-none" />
+    <section id="business-impact" className="relative py-28 md:py-36 overflow-hidden bg-navy-950">
+      {/* Sleek background overlays */}
+      <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-950/70 to-navy-950 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
         {/* ── Section Header ── */}
-        <div className="text-center mb-16 md:mb-20">
+        <div className="text-left mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,434 +79,430 @@ export default function BusinessImpact() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-electric/30 bg-electric/5 text-electric text-[11px] font-mono tracking-widest uppercase mb-4"
           >
             <TrendingUp size={12} />
-            Commercial Viability
+            Commercial Potential & Viability
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-heading font-bold text-white tracking-wider"
+            className="text-4xl md:text-5xl font-body font-bold text-white tracking-wider"
           >
-            Business Impact & <span className="gradient-text bg-gradient-to-r from-electric to-cyan-400 bg-clip-text text-transparent">Commercial Potential</span>
+            Business Impact
           </motion.h2>
         </div>
 
-        {/* ─── Main Two-Column Layout ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* ─── Grid: 60% Left Dashboard | 40% Right Pitch Report ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* ══════════════════════════════════════════════
-              LEFT COLUMN: Interactive Charts Dashboard
+              LEFT SIDE (60% Width): Interactive Dashboard
               ══════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="flex items-center justify-between p-1 glass rounded-xl border border-white/5">
-              <button
-                onClick={() => setActiveChartTab('market')}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-heading text-xs uppercase tracking-widest transition-all duration-300 ${
-                  activeChartTab === 'market'
-                    ? 'bg-electric text-navy-950 font-bold shadow-glow-sm'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <PieChart size={14} />
-                Market & Revenues
-              </button>
-              <button
-                onClick={() => setActiveChartTab('performance')}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-heading text-xs uppercase tracking-widest transition-all duration-300 ${
-                  activeChartTab === 'performance'
-                    ? 'bg-electric text-navy-950 font-bold shadow-glow-sm'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <BarChart3 size={14} />
-                Metrics & Comparisons
-              </button>
-            </div>
+          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
+            
+            {/* Top Charts Grid: Donut Charts */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Chart 1: Market Distribution */}
+              <GlassCard className="p-6 relative overflow-hidden flex flex-col justify-between">
+                <div>
+                  <h4 className="font-body font-bold text-base text-white mb-1">
+                    Potential Market Distribution
+                  </h4>
+                  <p className="text-xs text-white/40 mb-6">Illustrative distribution of customer sectors</p>
+                </div>
 
-            <GlassCard className="relative overflow-hidden p-6 md:p-8">
-              <AnimatePresence mode="wait">
-                {activeChartTab === 'market' ? (
-                  <motion.div
-                    key="market-charts"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-8"
-                  >
-                    {/* Donut 1: Market Distribution */}
-                    <div>
-                      <h4 className="font-heading text-white text-sm tracking-wider uppercase mb-1">
-                        Potential Market Distribution
-                      </h4>
-                      <p className="text-xs text-white/40 mb-6">
-                        Illustrative distribution of potential customer sectors for the RAIC ecosystem.
-                      </p>
+                <div className="flex flex-col sm:flex-row items-center gap-6 justify-center">
+                  <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
+                    <svg width="120" height="120" viewBox="0 0 120 120" className="select-none">
+                      <circle cx="60" cy="60" r="30" className="fill-navy-950/60" />
+                      {(() => {
+                        let accum = 0;
+                        return marketSegments.map((seg) => {
+                          const width = (seg.value / 100) * circumference;
+                          const offset = circumference - width;
+                          const rotation = accum * 360;
+                          accum += seg.value / 100;
+                          const isSelected = hoveredMarketSeg?.label === seg.label;
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                        {/* SVG Donut */}
-                        <div className="relative flex justify-center">
-                          <svg width="160" height="160" viewBox="0 0 160 160" className="select-none">
-                            {/* Inner circle (hole background) */}
-                            <circle cx="80" cy="80" r="40" className="fill-navy-950/70" />
-                            
-                            {/* Dynamic segments */}
-                            {(() => {
-                              let accum = 0;
-                              return marketSegments.map((seg) => {
-                                const width = (seg.value / 100) * circumference;
-                                const offset = circumference - width;
-                                const rotation = accum * 360;
-                                accum += seg.value / 100;
-                                const isSelected = hoveredMarketSeg?.label === seg.label;
-
-                                return (
-                                  <circle
-                                    key={seg.label}
-                                    cx="80"
-                                    cy="80"
-                                    r="40"
-                                    fill="transparent"
-                                    stroke={seg.color}
-                                    strokeWidth={isSelected ? 16 : 12}
-                                    strokeDasharray={circumference}
-                                    strokeDashoffset={offset}
-                                    transform={`rotate(${rotation - 90} 80 80)`}
-                                    className="transition-all duration-300 cursor-pointer"
-                                    onMouseEnter={() => setHoveredMarketSeg(seg)}
-                                    onMouseLeave={() => setHoveredMarketSeg(null)}
-                                  />
-                                );
-                              });
-                            })()}
-                          </svg>
-
-                          {/* Central Label */}
-                          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
-                              {hoveredMarketSeg ? 'Sector Share' : 'Total Market'}
-                            </span>
-                            <span className="text-xl font-heading font-bold text-white text-glow-sm mt-0.5">
-                              {hoveredMarketSeg ? `${hoveredMarketSeg.value}%` : '100%'}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Donut Legend */}
-                        <div className="space-y-2">
-                          {marketSegments.map((seg) => (
-                            <div
+                          return (
+                            <circle
                               key={seg.label}
-                              className={`flex items-center justify-between text-xs px-2.5 py-1.5 rounded-lg transition-colors cursor-default ${
-                                hoveredMarketSeg?.label === seg.label ? 'bg-white/5' : ''
-                              }`}
+                              cx="60"
+                              cy="60"
+                              r="30"
+                              fill="transparent"
+                              stroke={seg.color}
+                              strokeWidth={isSelected ? 14 : 10}
+                              strokeDasharray={circumference}
+                              strokeDashoffset={offset}
+                              transform={`rotate(${rotation - 90} 60 60)`}
+                              className="transition-all duration-300 cursor-pointer"
                               onMouseEnter={() => setHoveredMarketSeg(seg)}
                               onMouseLeave={() => setHoveredMarketSeg(null)}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
-                                <span className="text-white/70 font-body">{seg.label}</span>
-                              </div>
-                              <span className="font-mono font-bold text-white">{seg.value}%</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                            />
+                          );
+                        });
+                      })()}
+                    </svg>
+
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                      <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase">
+                        {hoveredMarketSeg ? 'Share' : 'Total'}
+                      </span>
+                      <span className="text-lg font-body font-bold text-white text-glow-sm mt-0.5">
+                        {hoveredMarketSeg ? `${hoveredMarketSeg.value}%` : '100%'}
+                      </span>
                     </div>
+                  </div>
 
-                    <hr className="border-white/5" />
-
-                    {/* Donut 2: Revenue Streams */}
-                    <div>
-                      <h4 className="font-heading text-white text-sm tracking-wider uppercase mb-1">
-                        Projected Revenue Streams
-                      </h4>
-                      <p className="text-xs text-white/40 mb-6">
-                        Illustrative revenue mix for Ragas Aerospace autonomous systems business.
-                      </p>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                        {/* SVG Donut */}
-                        <div className="relative flex justify-center">
-                          <svg width="160" height="160" viewBox="0 0 160 160" className="select-none">
-                            {/* Inner hole */}
-                            <circle cx="80" cy="80" r="40" className="fill-navy-950/70" />
-
-                            {/* Dynamic segments */}
-                            {(() => {
-                              let accum = 0;
-                              return revenueSegments.map((seg) => {
-                                const width = (seg.value / 100) * circumference;
-                                const offset = circumference - width;
-                                const rotation = accum * 360;
-                                accum += seg.value / 100;
-                                const isSelected = hoveredRevenueSeg?.label === seg.label;
-
-                                return (
-                                  <circle
-                                    key={seg.label}
-                                    cx="80"
-                                    cy="80"
-                                    r="40"
-                                    fill="transparent"
-                                    stroke={seg.color}
-                                    strokeWidth={isSelected ? 16 : 12}
-                                    strokeDasharray={circumference}
-                                    strokeDashoffset={offset}
-                                    transform={`rotate(${rotation - 90} 80 80)`}
-                                    className="transition-all duration-300 cursor-pointer"
-                                    onMouseEnter={() => setHoveredRevenueSeg(seg)}
-                                    onMouseLeave={() => setHoveredRevenueSeg(null)}
-                                  />
-                                );
-                              });
-                            })()}
-                          </svg>
-
-                          {/* Central Label */}
-                          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
-                              {hoveredRevenueSeg ? 'Revenue Share' : 'Total Revenue'}
-                            </span>
-                            <span className="text-xl font-heading font-bold text-white text-glow-sm mt-0.5">
-                              {hoveredRevenueSeg ? `${hoveredRevenueSeg.value}%` : '100%'}
-                            </span>
-                          </div>
+                  <div className="space-y-1.5 flex-1 w-full">
+                    {marketSegments.map((seg) => (
+                      <div
+                        key={seg.label}
+                        className={`flex items-center justify-between text-xs px-2 py-1 rounded-lg transition-colors cursor-default ${
+                          hoveredMarketSeg?.label === seg.label ? 'bg-white/5' : ''
+                        }`}
+                        onMouseEnter={() => setHoveredMarketSeg(seg)}
+                        onMouseLeave={() => setHoveredMarketSeg(null)}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
+                          <span className="text-white/60 font-body">{seg.label}</span>
                         </div>
+                        <span className="font-mono font-bold text-white">{seg.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </GlassCard>
 
-                        {/* Donut Legend */}
-                        <div className="space-y-2">
-                          {revenueSegments.map((seg) => (
-                            <div
+              {/* Chart 2: Projected Revenue Streams */}
+              <GlassCard className="p-6 relative overflow-hidden flex flex-col justify-between">
+                <div>
+                  <h4 className="font-body font-bold text-base text-white mb-1">
+                    Projected Revenue Streams
+                  </h4>
+                  <p className="text-xs text-white/40 mb-6">Illustrative mix for autonomous systems</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-6 justify-center">
+                  <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
+                    <svg width="120" height="120" viewBox="0 0 120 120" className="select-none">
+                      <circle cx="60" cy="60" r="30" className="fill-navy-950/60" />
+                      {(() => {
+                        let accum = 0;
+                        return revenueSegments.map((seg) => {
+                          const width = (seg.value / 100) * circumference;
+                          const offset = circumference - width;
+                          const rotation = accum * 360;
+                          accum += seg.value / 100;
+                          const isSelected = hoveredRevenueSeg?.label === seg.label;
+
+                          return (
+                            <circle
                               key={seg.label}
-                              className={`flex items-center justify-between text-xs px-2.5 py-1.5 rounded-lg transition-colors cursor-default ${
-                                hoveredRevenueSeg?.label === seg.label ? 'bg-white/5' : ''
-                              }`}
+                              cx="60"
+                              cy="60"
+                              r="30"
+                              fill="transparent"
+                              stroke={seg.color}
+                              strokeWidth={isSelected ? 14 : 10}
+                              strokeDasharray={circumference}
+                              strokeDashoffset={offset}
+                              transform={`rotate(${rotation - 90} 60 60)`}
+                              className="transition-all duration-300 cursor-pointer"
                               onMouseEnter={() => setHoveredRevenueSeg(seg)}
                               onMouseLeave={() => setHoveredRevenueSeg(null)}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
-                                <span className="text-white/70 font-body">{seg.label}</span>
-                              </div>
-                              <span className="font-mono font-bold text-white">{seg.value}%</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="performance-charts"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-8"
-                  >
-                    {/* Operational Improvements Bar Chart */}
-                    <div>
-                      <h4 className="font-heading text-white text-sm tracking-wider uppercase mb-1">
-                        Estimated Operational Improvements
-                      </h4>
-                      <p className="text-xs text-white/40 mb-6">
-                        Illustrative estimates based on autonomous drone adoption across industries.
-                      </p>
-
-                      <div className="space-y-4">
-                        {operationalImprovements.map((item) => (
-                          <div key={item.label} className="group">
-                            <div className="flex justify-between text-xs mb-1">
-                              <span className="text-white/80 font-medium group-hover:text-electric transition-colors">{item.label}</span>
-                              <span className="font-mono font-bold text-white group-hover:text-glow-sm">{item.value}%</span>
-                            </div>
-                            <div className="relative h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-                              <motion.div
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${item.value}%` }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, ease: 'easeOut' }}
-                                className="h-full bg-gradient-to-r from-electric-600 to-electric rounded-full"
-                              />
-                            </div>
-                            <span className="text-[10px] text-white/30 block mt-0.5 ml-1">{item.desc}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <hr className="border-white/5" />
-
-                    {/* Competitor Analysis Bar Chart */}
-                    <div>
-                      <h4 className="font-heading text-white text-sm tracking-wider uppercase mb-1">
-                        Technology Capability Comparison
-                      </h4>
-                      <p className="text-xs text-white/40 mb-6">
-                        Illustrative capability score comparison between leading drone systems and the RAIC ecosystem.
-                      </p>
-
-                      <div className="space-y-4.5">
-                        {techCapabilities.map((item) => {
-                          const isRAIC = item.label === 'RAIC Ecosystem';
-                          return (
-                            <div key={item.label}>
-                              <div className="flex justify-between text-xs mb-1.5">
-                                <span className={`font-semibold ${isRAIC ? 'text-electric text-glow-sm' : 'text-white/60'}`}>
-                                  {item.label}
-                                </span>
-                                <span className={`font-mono font-bold ${isRAIC ? 'text-electric text-glow-sm' : 'text-white/70'}`}>
-                                  {item.value}/100
-                                </span>
-                              </div>
-                              <div className={`relative h-3 w-full bg-white/5 rounded-full overflow-hidden border ${isRAIC ? 'border-electric/30' : 'border-white/5'}`}>
-                                <motion.div
-                                  initial={{ width: 0 }}
-                                  whileInView={{ width: `${item.value}%` }}
-                                  viewport={{ once: true }}
-                                  transition={{ duration: 0.8, ease: 'easeOut' }}
-                                  className={`h-full bg-gradient-to-r ${item.color} rounded-full`}
-                                />
-                              </div>
-                            </div>
+                            />
                           );
-                        })}
-                      </div>
+                        });
+                      })()}
+                    </svg>
+
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                      <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase">
+                        {hoveredRevenueSeg ? 'Share' : 'Total'}
+                      </span>
+                      <span className="text-lg font-body font-bold text-white text-glow-sm mt-0.5">
+                        {hoveredRevenueSeg ? `${hoveredRevenueSeg.value}%` : '100%'}
+                      </span>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </GlassCard>
+                  </div>
+
+                  <div className="space-y-1.5 flex-1 w-full">
+                    {revenueSegments.map((seg) => (
+                      <div
+                        key={seg.label}
+                        className={`flex items-center justify-between text-xs px-2 py-1 rounded-lg transition-colors cursor-default ${
+                          hoveredRevenueSeg?.label === seg.label ? 'bg-white/5' : ''
+                        }`}
+                        onMouseEnter={() => setHoveredRevenueSeg(seg)}
+                        onMouseLeave={() => setHoveredRevenueSeg(null)}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
+                          <span className="text-white/60 font-body">{seg.label}</span>
+                        </div>
+                        <span className="font-mono font-bold text-white">{seg.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+
+            {/* Bottom Charts Grid: Area Chart & Column Chart */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Chart 3: Employment Growth Trend (SVG Area Chart) */}
+              <GlassCard className="p-6 relative overflow-hidden flex flex-col justify-between">
+                <div>
+                  <h4 className="font-body font-bold text-base text-white mb-1">
+                    Employment Projections Trend
+                  </h4>
+                  <p className="text-xs text-white/40 mb-6">Direct & indirect workforce scaling</p>
+                </div>
+
+                <div className="relative">
+                  {/* SVG Area Chart */}
+                  <svg viewBox="0 0 240 110" className="w-full h-auto overflow-visible select-none">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#00b4ff" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="#00b4ff" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Grid lines */}
+                    <line x1="30" y1="20" x2="220" y2="20" stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3" />
+                    <line x1="30" y1="55" x2="220" y2="55" stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3" />
+                    <line x1="30" y1="90" x2="220" y2="90" stroke="rgba(255,255,255,0.08)" />
+
+                    {/* Fills & Lines */}
+                    <path
+                      d="M 30,90 Q 75,85 120,55 T 210,20 L 210,90 Z"
+                      fill="url(#areaGrad)"
+                    />
+                    <path
+                      d="M 30,90 Q 75,85 120,55 T 210,20"
+                      fill="none"
+                      stroke="#00b4ff"
+                      strokeWidth="2.5"
+                    />
+
+                    {/* Nodes */}
+                    {[
+                      { x: 30, y: 90, val: '15 Jobs', label: 'Phase I' },
+                      { x: 120, y: 55, val: '50 Jobs', label: 'Phase II' },
+                      { x: 210, y: 20, val: '100+ Jobs', label: 'Phase III' },
+                    ].map((node, i) => (
+                      <g key={i} className="cursor-pointer" onMouseEnter={() => setHoveredJob(node)} onMouseLeave={() => setHoveredJob(null)}>
+                        <circle
+                          cx={node.x}
+                          cy={node.y}
+                          r={hoveredJob?.label === node.label ? 6 : 4}
+                          className="fill-navy-950 stroke-electric"
+                          strokeWidth="2.5"
+                        />
+                        <text x={node.x} y="104" textAnchor="middle" className="fill-white/40 text-[9px] font-mono">
+                          {node.label}
+                        </text>
+                      </g>
+                    ))}
+                  </svg>
+
+                  {/* Dynamic Tooltip inside card */}
+                  <div className="h-6 flex items-center justify-center mt-3">
+                    <AnimatePresence mode="wait">
+                      {hoveredJob ? (
+                        <motion.span
+                          key={hoveredJob.label}
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -5 }}
+                          className="text-[11px] font-mono text-electric text-glow-sm"
+                        >
+                          {hoveredJob.label} Target: <strong>{hoveredJob.val}</strong>
+                        </motion.span>
+                      ) : (
+                        <span className="text-[11px] font-mono text-white/30">Hover nodes to view targets</span>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </GlassCard>
+
+              {/* Chart 4: Expected Benefits (SVG Column Chart) */}
+              <GlassCard className="p-6 relative overflow-hidden flex flex-col justify-between">
+                <div>
+                  <h4 className="font-body font-bold text-base text-white mb-1">
+                    Expected Benefits Rating
+                  </h4>
+                  <p className="text-xs text-white/40 mb-6">Efficiency scaling vs. conventional methods</p>
+                </div>
+
+                <div className="relative">
+                  <svg viewBox="0 0 240 100" className="w-full h-auto overflow-visible select-none">
+                    <line x1="10" y1="85" x2="230" y2="85" stroke="rgba(255,255,255,0.08)" />
+                    {benefitsData.map((benefit, i) => {
+                      const barWidth = 24;
+                      const x = 30 + i * 50;
+                      const barHeight = (benefit.value / 100) * 70;
+                      const y = 85 - barHeight;
+                      const isHovered = hoveredBenefit?.label === benefit.label;
+
+                      return (
+                        <g key={benefit.label} className="cursor-pointer" onMouseEnter={() => setHoveredBenefit(benefit)} onMouseLeave={() => setHoveredBenefit(null)}>
+                          {/* Bar background track */}
+                          <rect x={x} y="15" width={barWidth} height="70" rx="3" className="fill-white/[0.03]" />
+                          {/* Filled bar */}
+                          <rect
+                            x={x}
+                            y={y}
+                            width={barWidth}
+                            height={barHeight}
+                            rx="3"
+                            fill={benefit.color}
+                            className="transition-all duration-300 opacity-80 hover:opacity-100"
+                            style={{
+                              filter: isHovered ? 'drop-shadow(0 0 8px rgba(0,180,255,0.5))' : 'none',
+                            }}
+                          />
+                          {/* Value label */}
+                          <text x={x + barWidth / 2} y={y - 4} textAnchor="middle" className="fill-white/80 font-mono text-[9px] font-bold">
+                            {benefit.value}%
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </svg>
+
+                  <div className="h-6 flex items-center justify-center mt-3 text-center">
+                    <AnimatePresence mode="wait">
+                      {hoveredBenefit ? (
+                        <motion.span
+                          key={hoveredBenefit.label}
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -5 }}
+                          className="text-[11px] font-mono text-white/70"
+                        >
+                          <strong className="text-electric">{hoveredBenefit.label}:</strong> {hoveredBenefit.desc}
+                        </motion.span>
+                      ) : (
+                        <span className="text-[11px] font-mono text-white/30">Hover columns to view descriptions</span>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </GlassCard>
+
+            </div>
           </div>
 
           {/* ══════════════════════════════════════════════
-              RIGHT COLUMN: Detailed Pitch Report
+              RIGHT SIDE (40% Width): Pitch Report Contents
               ══════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-5 xl:col-span-4 space-y-6">
+            
+            {/* Tabs for content categorization */}
             <div className="flex items-center justify-between p-1 glass rounded-xl border border-white/5">
               <button
                 onClick={() => setActiveReportTab('problems')}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] uppercase tracking-wider transition-all duration-300 ${
                   activeReportTab === 'problems'
                     ? 'bg-electric text-navy-950 font-bold shadow-glow-sm'
                     : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Activity size={14} />
-                Real-World Problems
+                Problems
               </button>
               <button
                 onClick={() => setActiveReportTab('employment')}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] uppercase tracking-wider transition-all duration-300 ${
                   activeReportTab === 'employment'
                     ? 'bg-electric text-navy-950 font-bold shadow-glow-sm'
                     : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Users size={14} />
-                Employment & Markets
+                Sectors
               </button>
               <button
                 onClick={() => setActiveReportTab('strategic')}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-3 rounded-lg font-heading text-[10px] uppercase tracking-wider transition-all duration-300 ${
                   activeReportTab === 'strategic'
                     ? 'bg-electric text-navy-950 font-bold shadow-glow-sm'
                     : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Award size={14} />
-                Strategic Vision
+                Strategy
               </button>
             </div>
 
-            <div className="glass border border-white/5 rounded-2xl p-6 md:p-8 space-y-8 min-h-[500px]">
+            <div className="glass border border-white/5 rounded-2xl p-6 md:p-8 space-y-6 min-h-[500px] flex flex-col justify-between">
+              
               <AnimatePresence mode="wait">
                 {activeReportTab === 'problems' && (
                   <motion.div
                     key="problems-content"
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0, x: -15 }}
+                    transition={{ duration: 0.25 }}
                     className="space-y-6"
                   >
                     <div>
-                      <h3 className="font-heading text-lg text-white mb-2 tracking-wider">
-                        Real-World Problems Addressed
+                      <h3 className="font-body font-bold text-lg text-white mb-2 tracking-wider">
+                        Problems Addressed
                       </h3>
-                      <p className="text-sm text-white/60 leading-relaxed font-body">
-                        The RAIC ecosystem addresses critical operational bottlenecks by enabling fully autonomous, collaborative, and self-optimizing swarm drone fleets with minimal human intervention.
+                      <p className="text-xs text-white/50 leading-relaxed">
+                        Traditional drone systems require continuous pilot controls and lack intelligent swarm collaboration. RAIC addresses:
                       </p>
                     </div>
 
                     <div className="space-y-4">
-                      {/* Problem 1 */}
-                      <div className="border border-white/5 bg-white/5 rounded-xl p-4.5 space-y-2">
-                        <div className="flex items-center gap-2 text-electric">
-                          <Zap size={16} />
-                          <h4 className="font-heading text-sm uppercase tracking-wider">Disaster Response Delays</h4>
-                        </div>
-                        <p className="text-xs text-white/50 leading-relaxed">
-                          Faced with blocked roads, disrupted cellular signals, and dangerous manual ground surveys.
-                        </p>
-                        <div className="text-xs text-white/70">
-                          <strong>RAIC Impact:</strong> Rapid thermal search, autonomous pathfinder grids, and instant situational mapping.
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 text-[10px] font-mono">
-                          Benefit: ~60–70% reduction in disaster assessment time
+                      {/* Prob 1 */}
+                      <div className="flex items-start gap-3">
+                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-electric shrink-0" />
+                        <div>
+                          <strong className="text-xs text-white/80 block">Disaster Delays</strong>
+                          <p className="text-[11px] text-white/50 leading-relaxed mt-0.5">
+                            Slow assessment due to destroyed ground routes. RAIC automates victim search.
+                          </p>
                         </div>
                       </div>
 
-                      {/* Problem 2 */}
-                      <div className="border border-white/5 bg-white/5 rounded-xl p-4.5 space-y-2">
-                        <div className="flex items-center gap-2 text-electric">
-                          <Zap size={16} />
-                          <h4 className="font-heading text-sm uppercase tracking-wider">High Cost of Inspection</h4>
-                        </div>
-                        <p className="text-xs text-white/50 leading-relaxed">
-                          Manual checking of miles of power transmission grids, solar panels, and oil refineries poses safety risks and high labor overhead.
-                        </p>
-                        <div className="text-xs text-white/70">
-                          <strong>RAIC Impact:</strong> Continuous automated drone patrol routines with real-time AI anomaly and defect identification.
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 text-[10px] font-mono">
-                          Benefit: 40–50% reduction in operational inspection costs
+                      {/* Prob 2 */}
+                      <div className="flex items-start gap-3">
+                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-electric shrink-0" />
+                        <div>
+                          <strong className="text-xs text-white/80 block">High Inspection Costs</strong>
+                          <p className="text-[11px] text-white/50 leading-relaxed mt-0.5">
+                            Manual checks of lines/refineries are risky. RAIC cuts inspection costs by 40-50%.
+                          </p>
                         </div>
                       </div>
 
-                      {/* Problem 3 */}
-                      <div className="border border-white/5 bg-white/5 rounded-xl p-4.5 space-y-2">
-                        <div className="flex items-center gap-2 text-electric">
-                          <Zap size={16} />
-                          <h4 className="font-heading text-sm uppercase tracking-wider">Border & Infrastructure Surveillance</h4>
-                        </div>
-                        <p className="text-xs text-white/50 leading-relaxed">
-                          Broad regional boundaries and deep perimeters are hard to inspect persistently with finite human guards.
-                        </p>
-                        <div className="text-xs text-white/70">
-                          <strong>RAIC Impact:</strong> Day/night thermal scanning, target lock-on trackers, and non-stop swarm relay patrol loops.
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 text-[10px] font-mono">
-                          Benefit: Continuous coverage with minimized manpower dependency
+                      {/* Prob 3 */}
+                      <div className="flex items-start gap-3">
+                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-electric shrink-0" />
+                        <div>
+                          <strong className="text-xs text-white/80 block">Perimeter Security</strong>
+                          <p className="text-[11px] text-white/50 leading-relaxed mt-0.5">
+                            Continuous surveillance of large perimeters with non-stop autonomous swarm patrol cycles.
+                          </p>
                         </div>
                       </div>
 
-                      {/* Problem 4 */}
-                      <div className="border border-white/5 bg-white/5 rounded-xl p-4.5 space-y-2">
-                        <div className="flex items-center gap-2 text-electric">
-                          <Zap size={16} />
-                          <h4 className="font-heading text-sm uppercase tracking-wider">Agricultural Productivity</h4>
-                        </div>
-                        <p className="text-xs text-white/50 leading-relaxed">
-                          Traditional manual monitoring of crops is slow, preventing early stress detection and target pesticide mapping.
-                        </p>
-                        <div className="text-xs text-white/70">
-                          <strong>RAIC Impact:</strong> Smart multispectral scanning, precision crop hydration maps, and automated target spray lists.
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 text-[10px] font-mono">
-                          Benefit: 15–20% potential increase in agricultural yield
+                      {/* Prob 4 */}
+                      <div className="flex items-start gap-3">
+                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-electric shrink-0" />
+                        <div>
+                          <strong className="text-xs text-white/80 block">Agricultural Yield</strong>
+                          <p className="text-[11px] text-white/50 leading-relaxed mt-0.5">
+                            Autonomous multispectral scanning spots early crop stress, raising productivity by 15-20%.
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -518,81 +512,35 @@ export default function BusinessImpact() {
                 {activeReportTab === 'employment' && (
                   <motion.div
                     key="employment-content"
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0, x: -15 }}
+                    transition={{ duration: 0.25 }}
                     className="space-y-6"
                   >
-                    {/* Employment Generation */}
                     <div>
-                      <div className="flex items-center gap-2 text-electric mb-2">
-                        <Users size={18} />
-                        <h3 className="font-heading text-lg text-white tracking-wider">
-                          Employment Generation
-                        </h3>
-                      </div>
-                      <p className="text-sm text-white/60 leading-relaxed mb-4">
-                        Developing deep-tech aerospace solutions locally creates high-skill career pathways across several technical, production, and field engineering disciplines.
+                      <h3 className="font-body font-bold text-lg text-white mb-2 tracking-wider">
+                        Markets & Job Growth
+                      </h3>
+                      <p className="text-xs text-white/50 leading-relaxed">
+                        High-skill jobs generated locally in software, aerospace design, manufacturing, and payload testing.
                       </p>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-                          <span className="text-[10px] font-mono tracking-wider text-white/40 uppercase block">Phase I</span>
-                          <span className="text-lg font-heading font-black text-electric block mt-1">10–15</span>
-                          <span className="text-[10px] text-white/50 block mt-0.5">Direct Aerospace & AI R&D roles</span>
-                        </div>
-                        <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-                          <span className="text-[10px] font-mono tracking-wider text-white/40 uppercase block">Phase II</span>
-                          <span className="text-lg font-heading font-black text-electric block mt-1">25–50</span>
-                          <span className="text-[10px] text-white/50 block mt-0.5">Hardware & Embedded Assembly</span>
-                        </div>
-                        <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-                          <span className="text-[10px] font-mono tracking-wider text-white/40 uppercase block">Phase III</span>
-                          <span className="text-lg font-heading font-black text-electric block mt-1">100+</span>
-                          <span className="text-[10px] text-white/50 block mt-0.5">Direct + Indirect Fleet Services</span>
-                        </div>
-                      </div>
                     </div>
 
-                    <hr className="border-white/5" />
+                    <div className="space-y-4">
+                      {/* Market segment detail */}
+                      <div className="p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <strong className="text-xs text-white/80 block mb-1">Target Segments</strong>
+                        <p className="text-[11px] text-white/50 leading-relaxed">
+                          Defence organizations, NDRF authorities, police forces, refinery operators, smart cities, and precision agri-tech operators.
+                        </p>
+                      </div>
 
-                    {/* Market Opportunity */}
-                    <div>
-                      <h3 className="font-heading text-md text-white mb-3 uppercase tracking-wider">
-                        Target Customer Segments
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="bg-white/5 p-3.5 rounded-xl border border-white/5">
-                          <strong className="text-xs text-white/80 block mb-1">Government Sectors</strong>
-                          <ul className="text-[11px] text-white/50 space-y-1">
-                            <li>• Defence Organizations (Swarm UAVs)</li>
-                            <li>• National Disaster Response Forces</li>
-                            <li>• State Police & Forest Departments</li>
-                          </ul>
-                        </div>
-                        <div className="bg-white/5 p-3.5 rounded-xl border border-white/5">
-                          <strong className="text-xs text-white/80 block mb-1">Industrial Sectors</strong>
-                          <ul className="text-[11px] text-white/50 space-y-1">
-                            <li>• Oil, Gas, and Pipeline Operators</li>
-                            <li>• Solar/Wind Energy Infrastructure</li>
-                            <li>• Smart City perimeter control</li>
-                          </ul>
-                        </div>
-                        <div className="bg-white/5 p-3.5 rounded-xl border border-white/5">
-                          <strong className="text-xs text-white/80 block mb-1">Agriculture</strong>
-                          <ul className="text-[11px] text-white/50 space-y-1">
-                            <li>• Large farms & Agri-tech firms</li>
-                            <li>• Drone spraying service providers</li>
-                          </ul>
-                        </div>
-                        <div className="bg-white/5 p-3.5 rounded-xl border border-white/5">
-                          <strong className="text-xs text-white/80 block mb-1">Research & Academic</strong>
-                          <ul className="text-[11px] text-white/50 space-y-1">
-                            <li>• Universities & AI Laboratories</li>
-                            <li>• National Aerospace Research Centers</li>
-                          </ul>
-                        </div>
+                      <div className="p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <strong className="text-xs text-white/80 block mb-1">Revenue Opportunities</strong>
+                        <p className="text-[11px] text-white/50 leading-relaxed">
+                          Hardware sales of swarm fleets, RAIC autonomy software licensing, Annual Maintenance Contracts (AMC), and Mission-as-a-Service (MaaS).
+                        </p>
                       </div>
                     </div>
                   </motion.div>
@@ -601,67 +549,56 @@ export default function BusinessImpact() {
                 {activeReportTab === 'strategic' && (
                   <motion.div
                     key="strategic-content"
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0, x: -15 }}
+                    transition={{ duration: 0.25 }}
                     className="space-y-6"
                   >
-                    {/* Economic Impact & Substitution */}
                     <div>
-                      <h3 className="font-heading text-lg text-white mb-2 tracking-wider">
-                        Economic & National Impact
+                      <h3 className="font-body font-bold text-lg text-white mb-2 tracking-wider">
+                        Strategic Alignment
                       </h3>
-                      <p className="text-xs text-white/50 leading-relaxed mb-4">
-                        Indigenous deep-tech development decreases reliance on imported UAV platforms, boosting local manufacturing and retaining intellectual property within domestic borders.
+                      <p className="text-xs text-white/50 leading-relaxed">
+                        Aligned with national industrial and deep-tech missions:
                       </p>
+                    </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                        <div className="flex items-center gap-2 text-white/70">
-                          <CheckCircle2 size={14} className="text-electric shrink-0" />
-                          <span>Import Substitution</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-white/70">
-                          <CheckCircle2 size={14} className="text-electric shrink-0" />
-                          <span>Aerospace Patent Creation</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-white/70">
-                          <CheckCircle2 size={14} className="text-electric shrink-0" />
-                          <span>Digital India & Startup India Link</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-white/70">
-                          <CheckCircle2 size={14} className="text-electric shrink-0" />
-                          <span>Atmanirbhar Bharat Alignment</span>
-                        </div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px] text-white/70">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-electric" />
+                        Atmanirbhar Bharat
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-electric" />
+                        Make in India
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-electric" />
+                        Digital India
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-electric" />
+                        Drone Shakti
                       </div>
                     </div>
 
-                    <hr className="border-white/5" />
-
-                    {/* Social & National Alignment */}
-                    <div>
-                      <h3 className="font-heading text-md text-white mb-2 uppercase tracking-wider">
-                        Social Contributions
-                      </h3>
-                      <p className="text-xs text-white/60 leading-relaxed font-body">
-                        The RAIC ecosystem aids civilian welfare directly by accelerating emergency searches during floods, protecting inspection workers from fatal heights or high-voltage risks, and raising regional agricultural crop yields.
-                      </p>
-                    </div>
-
-                    <hr className="border-white/5" />
-
-                    {/* Vision */}
-                    <div className="bg-electric/5 border border-electric/10 rounded-xl p-4.5">
-                      <h3 className="font-heading text-sm text-electric uppercase tracking-wider mb-1.5">
-                        Long-Term Vision
-                      </h3>
-                      <p className="text-xs text-white/70 leading-relaxed font-body">
-                        To position Ragas Aerospace as a leading Indian deep-technology company, establishing a global, highly scalable autonomous robotics ecosystem capable of supporting multiple industries through intelligent robotic platforms.
+                    <div className="p-3.5 bg-electric/5 border border-electric/10 rounded-xl mt-4">
+                      <strong className="text-xs text-electric block mb-1">Long-Term Vision</strong>
+                      <p className="text-[11px] text-white/60 leading-relaxed">
+                        To build a scalable robotics ecosystem, positioning Ragas Aerospace as a leading Indian deep-technology provider specializing in intelligent aerospace systems.
                       </p>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+              {/* Bottom tag line */}
+              <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <span>Ragas Aerospace R&D</span>
+                <span>Investor Report</span>
+              </div>
+
             </div>
           </div>
 
