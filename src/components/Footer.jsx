@@ -100,7 +100,7 @@ export default function Footer() {
         {/* ── Bottom Bar ── */}
         <div className="border-t border-white/5 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] font-mono text-white/25 tracking-wide">
-            © 2024 RAGAS AEROSPACE. All rights reserved.
+            © 2026 RAGAS AEROSPACE. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-[10px] font-mono text-white/20">
