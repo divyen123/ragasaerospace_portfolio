@@ -4,9 +4,11 @@
    Proportion: 60% Dashboard (Left) | 40% Pitch Report (Right).
    Spacious design with custom SVG Pie, Line, and Column charts.
    Uses font-body font-bold for clean modern headers.
+   Charts use CSS transitions for cross-browser compatibility
+   (Safari/macOS safe — no framer-motion on SVG primitives).
    ══════════════════════════════════════════════════════ */
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   TrendingUp,
@@ -62,6 +64,24 @@ export default function BusinessImpact() {
 
   const circumference = 2 * Math.PI * 30; // 188.5
 
+  /* ── IntersectionObserver for chart animations (Safari-safe) ── */
+  const chartsRef = useRef(null);
+  const [chartsVisible, setChartsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setChartsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (chartsRef.current) observer.observe(chartsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="business-impact" className="relative py-28 md:py-36 overflow-hidden bg-navy-950">
       {/* Sleek background overlays */}
@@ -98,7 +118,7 @@ export default function BusinessImpact() {
           {/* ══════════════════════════════════════════════
               LEFT SIDE (60% Width): Interactive Dashboard
               ══════════════════════════════════════════════ */}
-          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
+          <div ref={chartsRef} className="lg:col-span-7 xl:col-span-8 space-y-8">
             
             {/* Top Charts Grid: Donut Charts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -126,7 +146,7 @@ export default function BusinessImpact() {
                           const isSelected = hoveredMarketSeg?.label === seg.label;
 
                           return (
-                            <motion.circle
+                            <circle
                               key={seg.label}
                               cx="60"
                               cy="60"
@@ -135,12 +155,10 @@ export default function BusinessImpact() {
                               stroke={seg.color}
                               strokeWidth={isSelected ? 14 : 10}
                               strokeDasharray={circumference}
-                              initial={{ strokeDashoffset: circumference }}
-                              whileInView={{ strokeDashoffset: offset }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
+                              strokeDashoffset={chartsVisible ? offset : circumference}
                               transform={`rotate(${rotation - 90} 60 60)`}
-                              className="transition-all duration-300 cursor-pointer"
+                              style={{ transition: 'stroke-dashoffset 1.2s ease-out 0.1s, stroke-width 0.3s ease' }}
+                              className="cursor-pointer"
                               onMouseEnter={() => setHoveredMarketSeg(seg)}
                               onMouseLeave={() => setHoveredMarketSeg(null)}
                             />
@@ -200,7 +218,7 @@ export default function BusinessImpact() {
                           const isSelected = hoveredRevenueSeg?.label === seg.label;
 
                           return (
-                            <motion.circle
+                            <circle
                               key={seg.label}
                               cx="60"
                               cy="60"
@@ -209,12 +227,10 @@ export default function BusinessImpact() {
                               stroke={seg.color}
                               strokeWidth={isSelected ? 14 : 10}
                               strokeDasharray={circumference}
-                              initial={{ strokeDashoffset: circumference }}
-                              whileInView={{ strokeDashoffset: offset }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
+                              strokeDashoffset={chartsVisible ? offset : circumference}
                               transform={`rotate(${rotation - 90} 60 60)`}
-                              className="transition-all duration-300 cursor-pointer"
+                              style={{ transition: 'stroke-dashoffset 1.2s ease-out 0.1s, stroke-width 0.3s ease' }}
+                              className="cursor-pointer"
                               onMouseEnter={() => setHoveredRevenueSeg(seg)}
                               onMouseLeave={() => setHoveredRevenueSeg(null)}
                             />
@@ -273,14 +289,12 @@ export default function BusinessImpact() {
                         <stop offset="100%" stopColor="#00b4ff" stopOpacity="0.0" />
                       </linearGradient>
                       <clipPath id="areaClip">
-                        <motion.rect
+                        <rect
                           x="0"
                           y="0"
                           height="110"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: 240 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, ease: 'easeOut' }}
+                          width={chartsVisible ? 240 : 0}
+                          style={{ transition: 'width 1.5s ease-out' }}
                         />
                       </clipPath>
                     </defs>
@@ -311,16 +325,18 @@ export default function BusinessImpact() {
                       { x: 210, y: 20, val: '100+ Jobs', label: 'Phase III' },
                     ].map((node, i) => (
                       <g key={i} className="cursor-pointer" onMouseEnter={() => setHoveredJob(node)} onMouseLeave={() => setHoveredJob(null)}>
-                        <motion.circle
+                        <circle
                           cx={node.x}
                           cy={node.y}
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.8 + i * 0.2, type: 'spring', stiffness: 200 }}
                           r={hoveredJob?.label === node.label ? 6 : 4}
                           className="fill-navy-950 stroke-electric"
                           strokeWidth="2.5"
+                          style={{
+                            transformBox: 'fill-box',
+                            transformOrigin: 'center',
+                            transform: chartsVisible ? 'scale(1)' : 'scale(0)',
+                            transition: `transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${0.8 + i * 0.2}s, r 0.2s ease`,
+                          }}
                         />
                         <text x={node.x} y="104" textAnchor="middle" className="fill-white/40 text-[9px] font-mono">
                           {node.label}
@@ -374,32 +390,35 @@ export default function BusinessImpact() {
                           {/* Bar background track */}
                           <rect x={x} y="15" width={barWidth} height="70" rx="3" className="fill-white/[0.03]" />
                           {/* Filled bar */}
-                          <motion.rect
+                          <rect
                             x={x}
-                            initial={{ y: 85, height: 0 }}
-                            whileInView={{ y: y, height: barHeight }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.0, ease: 'easeOut', delay: i * 0.1 }}
+                            y={y}
                             width={barWidth}
+                            height={barHeight}
                             rx="3"
                             fill={benefit.color}
-                            className="transition-all duration-300 opacity-80 hover:opacity-100"
+                            className="opacity-80 hover:opacity-100"
                             style={{
+                              transformBox: 'fill-box',
+                              transformOrigin: 'bottom',
+                              transform: chartsVisible ? 'scaleY(1)' : 'scaleY(0)',
+                              transition: `transform 1.0s ease-out ${i * 0.1}s`,
                               filter: isHovered ? 'drop-shadow(0 0 8px rgba(0,180,255,0.5))' : 'none',
                             }}
                           />
                           {/* Value label */}
-                          <motion.text
+                          <text
                             x={x + barWidth / 2}
-                            initial={{ opacity: 0, y: 80 }}
-                            whileInView={{ opacity: 1, y: y - 4 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.0, ease: 'easeOut', delay: i * 0.1 }}
+                            y={y - 4}
                             textAnchor="middle"
                             className="fill-white/80 font-mono text-[9px] font-bold"
+                            style={{
+                              opacity: chartsVisible ? 1 : 0,
+                              transition: `opacity 1.0s ease-out ${0.5 + i * 0.1}s`,
+                            }}
                           >
                             {benefit.value}%
-                          </motion.text>
+                          </text>
                         </g>
                       );
                     })}

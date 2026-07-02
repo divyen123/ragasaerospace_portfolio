@@ -30,9 +30,7 @@ export default function LogoIntro({ onIntroComplete }) {
     };
   }, [onIntroComplete]);
 
-  console.log('LogoIntro asset path:', logoImg);
-
-  /* ── Motion Variants for Cinematic Breathe Effect (No filters to ensure 100% crash safety) ── */
+  /* ── Motion Variants for Cinematic Breathe Effect ── */
   const logoVariants = {
     enter: {
       opacity: 0,
@@ -43,7 +41,7 @@ export default function LogoIntro({ onIntroComplete }) {
       scale: 1,
       transition: {
         duration: 1.2,
-        ease: [0.25, 0.46, 0.45, 0.94], // Cubic ease-out
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
     exit: {
@@ -51,7 +49,7 @@ export default function LogoIntro({ onIntroComplete }) {
       scale: 1.06,
       transition: {
         duration: 1.0,
-        ease: [0.55, 0.085, 0.68, 0.53], // Cubic ease-in
+        ease: [0.55, 0.085, 0.68, 0.53],
       },
     },
   };
@@ -65,18 +63,28 @@ export default function LogoIntro({ onIntroComplete }) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-electric/5 filter blur-[90px] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] md:w-[300px] md:h-[300px] rounded-full bg-gold/5 filter blur-[110px] pointer-events-none" />
 
-      {/* Logo container with breathe animations (Fills full page seamlessly) */}
+      {/* Logo container with breathe animations */}
       {logoImg && (
         <motion.div
           variants={logoVariants}
           initial="enter"
           animate={animationStep === 'enter' ? 'stay' : animationStep}
-          className="absolute inset-0 w-full h-full z-10"
+          className="relative z-10 w-full h-full flex items-center justify-center"
         >
+          {/* Mobile: contain the logo so it fits fully visible */}
+          {/* Desktop: cover the full screen as before */}
           <img
             src={logoImg}
             alt="RAGAS Aerospace Logo"
-            className="w-full h-full object-cover"
+            className="block md:hidden max-w-[90vw] max-h-[80vh] object-contain"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <img
+            src={logoImg}
+            alt="RAGAS Aerospace Logo"
+            className="hidden md:block w-full h-full object-cover absolute inset-0"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
             }}
