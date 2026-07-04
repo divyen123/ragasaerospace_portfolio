@@ -56,7 +56,7 @@ export default function Contact() {
     setStatus('sending');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/ragasaerospace@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/ceo@ragasgroups.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -220,13 +220,13 @@ export default function Contact() {
                 {/* Status Messages */}
                 {status === 'success' && (
                   <div className="bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    Message sent successfully! FormSubmit will send a confirmation link to <strong>ragasaerospace@gmail.com</strong> if this is the first submission. Please check your email to activate it.
+                    Message sent successfully! FormSubmit will send a confirmation link to <strong>ceo@ragasgroups.com</strong> if this is the first submission. Please check your email to activate it.
                   </div>
                 )}
 
                 {status === 'error' && (
                   <div className="bg-rose-950/50 border border-rose-500/40 text-rose-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    Oops! Something went wrong. Please try again or email us directly at <strong>ragasaerospace@gmail.com</strong>.
+                    Oops! Something went wrong. Please try again or email us directly at <strong>ceo@ragasgroups.com</strong>.
                   </div>
                 )}
               </form>
@@ -269,8 +269,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-white/70 text-sm font-medium">Email</p>
-                      <a href="mailto:ragasaerospace@gmail.com" className="text-white/40 hover:text-electric text-sm mt-0.5 transition-colors duration-250">
-                        ragasaerospace@gmail.com
+                      <a href="mailto:ceo@ragasgroups.com" className="text-white/40 hover:text-electric text-sm mt-0.5 transition-colors duration-250">
+                        ceo@ragasgroups.com
                       </a>
                     </div>
                   </div>
@@ -313,7 +313,7 @@ export default function Contact() {
                     <Globe className="w-5 h-5 text-electric" />
                   </a>
                   <a
-                    href="mailto:ragasaerospace@gmail.com"
+                    href="mailto:ceo@ragasgroups.com"
                     aria-label="Email"
                     className="w-10 h-10 rounded-full bg-electric/10 border border-electric/20
                                flex items-center justify-center
