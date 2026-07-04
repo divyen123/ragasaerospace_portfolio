@@ -283,12 +283,12 @@ export default function Contact() {
                     <div>
                       <p className="text-white/70 text-sm font-medium">Founder&apos;s Portfolio</p>
                       <a
-                        href="https://founder-portfolio-steel.vercel.app"
+                        href="https://founder.ragasgroups.com/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white/40 hover:text-electric text-sm mt-0.5 transition-colors duration-250"
                       >
-                        founder-portfolio-steel.vercel.app
+                        founder.ragasgroups.com
                       </a>
                     </div>
                   </div>
@@ -302,7 +302,7 @@ export default function Contact() {
                 </p>
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://ragas-aerospace.vercel.app/"
+                    href="https://aerospace.ragasgroups.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Website"
