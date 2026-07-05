@@ -29,10 +29,9 @@ const footerColumns = [
   {
     heading: 'Connect',
     links: [
-      { label: 'LinkedIn', href: '#' },
-      { label: 'GitHub', href: '#' },
-      { label: 'Twitter / X', href: '#' },
-      { label: 'YouTube', href: '#' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/ragas-aerospace/?viewAsMember=true' },
+      { label: 'Instagram', href: 'https://www.instagram.com/ragas_aerospace?igsh=ZWZna2FhYWc1c3Y=' },
+      { label: 'X', href: 'https://x.com/RagasAerospace' },
     ],
   },
 ];
@@ -86,6 +85,8 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-sm font-body text-white/40 hover:text-electric transition-colors duration-300"
                     >
                       {link.label}
