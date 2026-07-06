@@ -9,21 +9,11 @@ import { Rocket } from 'lucide-react';
 /* ── Footer Link Columns ── */
 const footerColumns = [
   {
-    heading: 'Company',
-    links: [
-      { label: 'About RAGAS', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Press Kit', href: '#' },
-      { label: 'Contact', href: '#contact' },
-    ],
-  },
-  {
     heading: 'Technology',
     links: [
       { label: 'RAIC Engine', href: '#raic' },
       { label: 'Drone Systems', href: '#drone-system' },
       { label: 'Swarm Intelligence', href: '#architecture' },
-      { label: 'Documentation', href: '#' },
     ],
   },
   {
