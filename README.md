@@ -28,22 +28,33 @@ This repository houses the source code for the **RAGAS Aerospace Interactive Por
 
 ---
 
+## 💻 Getting Started
 
-## 🚀 Deployment
+### Prerequisites
+Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
 
-The portfolio is deployed and hosted on **Vercel** with automatic integration through GitHub CI/CD:
+### Local Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/divyen123/ragasaerospace_portfolio.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-### ⚙️ Vercel Deployment Settings
-* **Framework Preset**: Vite
-* **Build Command**: `npm run build`
-* **Output Directory**: `dist`
-* **Root Directory**: `./` (Root project folder)
-* **Node.js Version**: `18.x` or higher
+---
 
-### 🔄 CI/CD Pipeline & Domain Management
-* **Automated Builds**: Every commit pushed to the `main` branch automatically triggers a production deployment build on Vercel.
-* **Custom Domain Mapping**: Deployed output is mapped and bound to the custom subdomain **[raic.ragasgroups.com](https://raic.ragasgroups.com/)** using CNAME records pointing to `cname.vercel-dns.com`.
-* **SSL & Security**: Automated Let's Encrypt SSL certificates are renewed dynamically by Vercel for transport security.
+## 🚀 Deployment & Infrastructure
+
+The platform is deployed using modern cloud hosting infrastructure configured for automatic delivery and domain resolution:
+
+* **CI/CD Deployment Pipeline**: The project utilizes a GitHub-integrated CI/CD workflow. Any code updates or feature enhancements pushed to the `main` branch trigger an automated build and deployment process, ensuring the live application is continuously up to date without manual intervention.
+* **Domain Management**: Domain routing is configured for the **[raic.ragasgroups.com](https://raic.ragasgroups.com/)** subdomain. It links directly to the deployed instance with secure SSL/TLS termination automatically handled and renewed at the edge.
 
 ---
 
