@@ -26,26 +26,6 @@ This repository houses the source code for the **RAGAS Aerospace Interactive Por
 * **Icons & UI components**: Lucide React & Swiper
 * **Browser Compatibility**: Polyfilled for older desktop/browser agents (`es2015` compilation target) with Safari-safe pure CSS SVG transition implementations.
 
----
-
-## 💻 Getting Started
-
-### Prerequisites
-Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
-
-### Local Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/divyen123/ragasaerospace_portfolio.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
 
 ---
 
