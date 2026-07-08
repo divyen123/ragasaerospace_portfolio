@@ -29,6 +29,24 @@ This repository houses the source code for the **RAGAS Aerospace Interactive Por
 ---
 
 
+## 🚀 Deployment
+
+The portfolio is deployed and hosted on **Vercel** with automatic integration through GitHub CI/CD:
+
+### ⚙️ Vercel Deployment Settings
+* **Framework Preset**: Vite
+* **Build Command**: `npm run build`
+* **Output Directory**: `dist`
+* **Root Directory**: `./` (Root project folder)
+* **Node.js Version**: `18.x` or higher
+
+### 🔄 CI/CD Pipeline & Domain Management
+* **Automated Builds**: Every commit pushed to the `main` branch automatically triggers a production deployment build on Vercel.
+* **Custom Domain Mapping**: Deployed output is mapped and bound to the custom subdomain **[raic.ragasgroups.com](https://raic.ragasgroups.com/)** using CNAME records pointing to `cname.vercel-dns.com`.
+* **SSL & Security**: Automated Let's Encrypt SSL certificates are renewed dynamically by Vercel for transport security.
+
+---
+
 ## 🌐 Custom Subdomains & Ecosystem
 
 * **Official Website**: [aerospace.ragasgroups.com](https://aerospace.ragasgroups.com/)
