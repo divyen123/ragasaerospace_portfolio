@@ -28,38 +28,6 @@ This repository houses the source code for the **RAGAS Aerospace Interactive Por
 
 ---
 
-## 💻 Getting Started
-
-### Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
-
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/divyen123/ragasaerospace_portfolio.git
-   cd ragasaerospace_portfolio
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-   Open your browser and navigate to `http://localhost:5173` to see the live site.
-
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
-   This will generate a highly optimized `dist/` directory containing native JavaScript files compiled for standard `es2015` compatible browsers.
-
----
 
 ## 🌐 Custom Subdomains & Ecosystem
 
