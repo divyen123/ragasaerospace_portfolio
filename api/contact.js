@@ -1,6 +1,4 @@
-import nodemailer from 'nodemailer';
-
-const requiredEnv = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'CONTACT_TO_EMAIL'];
+const requiredEnv = ['RESEND_API_KEY', 'CONTACT_TO_EMAIL', 'CONTACT_FROM_EMAIL'];
 
 const json = (response, statusCode, body) => {
   response.status(statusCode).json(body);
@@ -40,45 +38,49 @@ export default async function handler(request, response) {
     });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: String(process.env.SMTP_SECURE).toLowerCase() === 'true',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER;
-  const toEmail = process.env.CONTACT_TO_EMAIL;
-
   try {
-    const info = await transporter.sendMail({
-      from: fromEmail,
-      to: toEmail,
-      replyTo: email,
-      subject: `Ragas Aerospace Contact: ${subject}`,
-      text: [
-        message,
-        '',
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Subject: ${subject}`,
-      ].join('\n'),
-      html: `
-        <h2>New Ragas Aerospace Contact Inquiry</h2>
-        <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
-        <hr />
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-      `,
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: process.env.CONTACT_FROM_EMAIL,
+        to: process.env.CONTACT_TO_EMAIL,
+        reply_to: email,
+        subject: `Ragas Aerospace Contact: ${subject}`,
+        text: [
+          message,
+          '',
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Subject: ${subject}`,
+        ].join('\n'),
+        html: `
+          <h2>New Ragas Aerospace Contact Inquiry</h2>
+          <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
+          <hr />
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+        `,
+      }),
     });
 
-    return json(response, 200, { ok: true, messageId: info.messageId });
+    const result = await resendResponse.json().catch(() => ({}));
+
+    if (!resendResponse.ok) {
+      console.error('Resend send failed:', result);
+      return json(response, resendResponse.status, {
+        ok: false,
+        error: result?.message || 'Email delivery failed',
+      });
+    }
+
+    return json(response, 200, { ok: true, messageId: result?.id });
   } catch (error) {
-    console.error('SMTP send failed:', error);
+    console.error('Resend request failed:', error);
     return json(response, 502, {
       ok: false,
       error: 'Email delivery failed',
