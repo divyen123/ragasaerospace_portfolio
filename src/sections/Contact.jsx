@@ -36,20 +36,6 @@ const inputClasses = `
 
 const contactEmail = 'ceo@ragasgroups.com';
 
-const buildMailtoHref = ({ name, email, subject, message }) => {
-  const safeSubject = subject?.trim() || 'General Inquiry';
-  const body = [
-    message,
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-  ].join('\n');
-
-  return `mailto:${contactEmail}?subject=${encodeURIComponent(
-    `Ragas Aerospace Contact: ${safeSubject}`
-  )}&body=${encodeURIComponent(body)}`;
-};
-
 export default function Contact() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -61,7 +47,7 @@ export default function Contact() {
     subject: '',
     message: '',
   });
-  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'fallback'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -70,8 +56,6 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-
-    const fallbackMailtoHref = buildMailtoHref(formData);
 
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${contactEmail}`, {
@@ -85,7 +69,9 @@ export default function Contact() {
           email: formData.email,
           subject: formData.subject || 'General Inquiry',
           message: formData.message,
-          _subject: `Ragas Aerospace Contact: ${formData.subject || 'General'}`
+          _subject: `Ragas Aerospace Contact: ${formData.subject || 'General'}`,
+          _captcha: 'false',
+          _template: 'table'
         })
       });
 
@@ -98,13 +84,11 @@ export default function Contact() {
           message: '',
         });
       } else {
-        window.location.href = fallbackMailtoHref;
-        setStatus('fallback');
+        setStatus('error');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      window.location.href = fallbackMailtoHref;
-      setStatus('fallback');
+      setStatus('error');
     }
   };
 
@@ -240,13 +224,7 @@ export default function Contact() {
                 {/* Status Messages */}
                 {status === 'success' && (
                   <div className="bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    Message sent successfully! Please check <strong>{contactEmail}</strong> for the inquiry.
-                  </div>
-                )}
-
-                {status === 'fallback' && (
-                  <div className="bg-electric/10 border border-electric/30 text-electric rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    We opened your email app with this message pre-filled. If it did not open, email us directly at <strong>{contactEmail}</strong>.
+                    Message sent successfully! We'll get back to you soon.
                   </div>
                 )}
               </form>
