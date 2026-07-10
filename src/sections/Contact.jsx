@@ -34,7 +34,7 @@ const inputClasses = `
   transition-all duration-200
 `;
 
-const contactEmail = 'ceo@ragasgroups.com';
+const sendTimeoutMs = 12000;
 
 export default function Contact() {
   const sectionRef = useRef(null);
@@ -57,21 +57,22 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), sendTimeoutMs);
+
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${contactEmail}`, {
+      const response = await fetch('/api/contact', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
+        signal: controller.signal,
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           subject: formData.subject || 'General Inquiry',
           message: formData.message,
-          _subject: `Ragas Aerospace Contact: ${formData.subject || 'General'}`,
-          _captcha: 'false',
-          _template: 'table'
         })
       });
 
@@ -89,6 +90,8 @@ export default function Contact() {
     } catch (error) {
       console.error('Error submitting form:', error);
       setStatus('error');
+    } finally {
+      window.clearTimeout(timeoutId);
     }
   };
 
@@ -225,6 +228,11 @@ export default function Contact() {
                 {status === 'success' && (
                   <div className="bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
                     Message sent successfully! We'll get back to you soon.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="bg-rose-950/50 border border-rose-500/40 text-rose-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
+                    We could not send your message right now. Please try again in a moment.
                   </div>
                 )}
               </form>
