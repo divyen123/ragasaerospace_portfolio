@@ -34,6 +34,22 @@ const inputClasses = `
   transition-all duration-200
 `;
 
+const contactEmail = 'ceo@ragasgroups.com';
+
+const buildMailtoHref = ({ name, email, subject, message }) => {
+  const safeSubject = subject?.trim() || 'General Inquiry';
+  const body = [
+    message,
+    '',
+    `Name: ${name}`,
+    `Email: ${email}`,
+  ].join('\n');
+
+  return `mailto:${contactEmail}?subject=${encodeURIComponent(
+    `Ragas Aerospace Contact: ${safeSubject}`
+  )}&body=${encodeURIComponent(body)}`;
+};
+
 export default function Contact() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -45,7 +61,7 @@ export default function Contact() {
     subject: '',
     message: '',
   });
-  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'fallback'
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -55,8 +71,10 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
 
+    const fallbackMailtoHref = buildMailtoHref(formData);
+
     try {
-      const response = await fetch("https://formsubmit.co/ajax/ceo@ragasgroups.com", {
+      const response = await fetch(`https://formsubmit.co/ajax/${contactEmail}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,11 +98,13 @@ export default function Contact() {
           message: '',
         });
       } else {
-        setStatus('error');
+        window.location.href = fallbackMailtoHref;
+        setStatus('fallback');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setStatus('error');
+      window.location.href = fallbackMailtoHref;
+      setStatus('fallback');
     }
   };
 
@@ -220,13 +240,13 @@ export default function Contact() {
                 {/* Status Messages */}
                 {status === 'success' && (
                   <div className="bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    Message sent successfully! FormSubmit will send a confirmation link to <strong>ceo@ragasgroups.com</strong> if this is the first submission. Please check your email to activate it.
+                    Message sent successfully! Please check <strong>{contactEmail}</strong> for the inquiry.
                   </div>
                 )}
 
-                {status === 'error' && (
-                  <div className="bg-rose-950/50 border border-rose-500/40 text-rose-300 rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
-                    Oops! Something went wrong. Please try again or email us directly at <strong>ceo@ragasgroups.com</strong>.
+                {status === 'fallback' && (
+                  <div className="bg-electric/10 border border-electric/30 text-electric rounded-xl p-4 text-xs leading-relaxed text-center mt-4">
+                    We opened your email app with this message pre-filled. If it did not open, email us directly at <strong>{contactEmail}</strong>.
                   </div>
                 )}
               </form>
