@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Shield } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { navLinks } from '../data/siteData';
 
 /* ── Animation Variants ── */
@@ -108,7 +108,7 @@ export default function Navbar() {
           </a>
 
           {/* ── Desktop Navigation ── */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const sectionId = link.href.replace('#', '');
               const isActive = activeSection === sectionId;
@@ -128,16 +128,6 @@ export default function Navbar() {
                 </a>
               );
             })}
-
-            {/* ── Defence Simulator Button ── */}
-            <a
-              href="/defence-simulator.html"
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-400/60 bg-cyan-400/10 text-cyan-300 hover:bg-cyan-400 hover:text-navy-950 font-heading text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-glow-sm hover:shadow-glow-md hover:scale-105"
-              title="Launch RAIC Defence Simulator"
-            >
-              <Shield className="w-3.5 h-3.5" />
-              <span>Defence simulator</span>
-            </a>
           </div>
 
           {/* ── Mobile Hamburger Button ── */}
@@ -193,16 +183,6 @@ export default function Navbar() {
                   </motion.a>
                 );
               })}
-
-              {/* ── Mobile Defence Simulator Button ── */}
-              <motion.a
-                href="/defence-simulator.html"
-                variants={linkItem}
-                className="mt-2 flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-cyan-400/70 bg-cyan-400/15 text-cyan-300 font-heading text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-glow-sm hover:bg-cyan-400 hover:text-navy-950"
-              >
-                <Shield className="w-4 h-4" />
-                <span>Defence simulator</span>
-              </motion.a>
             </motion.div>
           </motion.div>
         )}
