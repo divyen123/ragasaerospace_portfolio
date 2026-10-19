@@ -14,6 +14,7 @@ const footerColumns = [
       { label: 'RAIC Engine', href: '#raic' },
       { label: 'Drone Systems', href: '#drone-system' },
       { label: 'Swarm Intelligence', href: '#architecture' },
+      { label: 'Defence Simulator', href: '/defence-simulator.html' },
     ],
   },
   {

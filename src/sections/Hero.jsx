@@ -6,7 +6,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Shield } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
 import HUDOverlay from '../components/HUDOverlay';
 
@@ -161,6 +161,20 @@ export default function Hero() {
                          transition-all duration-300 hover:scale-105"
             >
               Explore RAIC Technology
+            </a>
+
+            {/* Defence Simulator CTA Button */}
+            <a
+              href="/defence-simulator.html"
+              className="group relative inline-flex items-center justify-center gap-2 border border-cyan-400 bg-cyan-400/15
+                         text-cyan-300 font-heading text-xs font-bold tracking-wider uppercase
+                         rounded-full px-6 py-2.5 w-full sm:w-auto
+                         hover:bg-cyan-400 hover:text-navy-950
+                         shadow-glow-sm hover:shadow-glow-lg
+                         transition-all duration-300 hover:scale-105"
+            >
+              <Shield className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
+              <span>Defence simulator</span>
             </a>
 
             {/* Secondary CTA */}

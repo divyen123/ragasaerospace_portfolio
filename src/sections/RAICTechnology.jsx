@@ -124,6 +124,28 @@ export default function RAICTechnology() {
             );
           })}
         </motion.div>
+
+        {/* ── Interactive Simulator Callout ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 px-6 py-4 rounded-2xl glass border border-cyan-400/30 bg-navy-900/60 shadow-glow-sm">
+            <div className="flex items-center gap-2.5 text-cyan-300 font-heading text-xs tracking-widest uppercase">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              Live Interactive Ground Control Station
+            </div>
+            <a
+              href="/defence-simulator.html"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-electric text-navy-950 font-heading text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-glow-sm hover:shadow-glow-md hover:scale-105"
+            >
+              Defence simulator
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

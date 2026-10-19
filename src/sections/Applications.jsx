@@ -8,7 +8,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight, X, Shield } from 'lucide-react';
 import { applications } from '../data/siteData';
 import SectionHeader from '../components/SectionHeader';
 import GlassCard from '../components/GlassCard';
@@ -271,6 +271,29 @@ export default function Applications() {
                     ))}
                   </ul>
                 </div>
+
+                {/* Defence Simulator CTA for Defence application */}
+                {selectedApp.title === 'Defence & Border Surveillance' && (
+                  <div className="mt-8 pt-6 border-t border-cyan-400/20 bg-cyan-950/20 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2 text-cyan-300 font-heading text-xs tracking-wider uppercase font-semibold">
+                        <Shield className="w-4 h-4 text-cyan-400" />
+                        Live Ground Control Simulation
+                      </div>
+                      <p className="text-xs text-white/60 font-body mt-1">
+                        Experience TARA AI mission planning, EO/IR sensor slew & 14-point Safety Guard in action.
+                      </p>
+                    </div>
+                    <a
+                      href="/defence-simulator.html"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-cyan-400 text-navy-950 font-heading text-xs font-bold tracking-wider uppercase shadow-glow-sm hover:shadow-glow-md transition-all hover:scale-105 shrink-0"
+                    >
+                      <Shield className="w-3.5 h-3.5" />
+                      Defence simulator
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
               </motion.div>
             </div>
           )}
